@@ -1,0 +1,18 @@
+{
+  "generator-plugin-wp": {
+    "name": "WP Cloudflare Dashboard",
+    "homepage": "https://wplove.io",
+    "description": "A Cloudflare Analytics Dashboard for Wordpress.",
+    "version": "0.0.0",
+    "author": "Tyler Kemme",
+    "authoremail": "tylerkemme@gmail.com",
+    "authorurl": "https://tylerkemme.com",
+    "license": "MIT",
+    "slug": "wp-cloudflare-dashboard",
+    "classname": "WP_Cloudflare_Dashboard",
+    "classprefix": "WPCD_",
+    "prefix": "wpcd",
+    "year": 2017,
+    "currentVersionWP": "4.7.2"
+  }
+}

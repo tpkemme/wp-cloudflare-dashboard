@@ -1,0 +1,28 @@
+{
+	"name": "wp-cloudflare-dashboard",
+	"description": "A Cloudflare Analytics Dashboard for Wordpress.",
+	"keywords": ["wordpress", "plugin", "generator-plugin-wp"],
+	"homepage": "https://wplove.io",
+	"license": "MIT",
+	"authors": [
+	{
+		"name": "Tyler Kemme",
+		"homepage": "https://tylerkemme.com"
+	}
+	],
+	"minimum-stability": "dev",
+	"type": "wordpress-plugin",
+	"require": {
+      "guzzlehttp/guzzle": "~6.0",
+	  "composer/installers": "v1.0.6",
+		"webdevstudios/cmb2": "v2.2.3.1"
+    },
+	"extra": {
+		"installer-paths": {
+			"../{$name}/": ["type:wordpress-plugin"]
+		}
+	},
+	"autoload": {
+		"classmap": ["wp-cloudflare-dashboard.php", "includes/"]
+	}
+}
