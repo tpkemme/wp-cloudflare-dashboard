@@ -1,7 +1,5 @@
 # WP Cloudflare Dashboard #
 **Contributors:**      Tyler Kemme  
-**Donate link:**       https://wplove.io  
-**Tags:**  
 **Requires at least:** 4.4  
 **Tested up to:**      4.7.2 
 **Stable tag:**        0.1.0  
