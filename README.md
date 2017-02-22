@@ -24,13 +24,3 @@ A Cloudflare Analytics Dashboard for Wordpress.
 
 ## Screenshots ##
 
-
-## Changelog ##
-
-### 0.0.0 ###
-* First release
-
-## Upgrade Notice ##
-
-### 0.0.0 ###
-First Release
