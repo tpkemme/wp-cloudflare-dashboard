@@ -3,7 +3,7 @@
  * Plugin Name: WP Cloudflare Dashboard
  * Plugin URI:  https://wplove.io
  * Description: A Cloudflare Analytics Dashboard for Wordpress.
- * Version:     0.0.0
+ * Version:     0.1.0
  * Author:      Tyler Kemme
  * Author URI:  https://tylerkemme.com
  * Donate link: https://wplove.io
@@ -14,7 +14,7 @@
  * @link https://wplove.io
  *
  * @package WP Cloudflare Dashboard
- * @version 0.0.0
+ * @version 0.1.0
  */
 
 /**
@@ -56,7 +56,7 @@ final class WP_Cloudflare_Dashboard {
 	 * @var  string
 	 * @since  0.0.0
 	 */
-	const VERSION = '0.0.0';
+	const VERSION = '0.1.0';
 
 	/**
 	 * URL of plugin directory
