@@ -261,7 +261,7 @@ gulp.task( 'uglify', [ 'concat' ], () =>
  * Delete the theme's .pot before we create a new one.
  */
 gulp.task( 'clean:pot', () =>
-	del( [ 'languages/_s.pot' ] )
+	del( [ 'languages/wp-cloudflare-dashboard.pot' ] )
 );
 
 /**
@@ -274,12 +274,11 @@ gulp.task( 'wp-pot', [ 'clean:pot' ], () =>
 		.pipe( plumber( {'errorHandler': handleErrors} ) )
 		.pipe( sort() )
 		.pipe( wpPot( {
-			'domain': '_s',
-			'destFile': '_s.pot',
-			'package': '_s',
-			'bugReport': 'http://_s.com',
-			'lastTranslator': 'John Doe <mail@_s.com>',
-			'team': 'Team <mail@_s.com>'
+			'domain': 'wp-cloudflare-dashboard',
+			'destFile': 'wp-cloudflare-dashboard.pot',
+			'package': 'wp-cloudflare-dashboard',
+			'bugReport': 'https://tylerkemme.com',
+			'lastTranslator': 'Tyler Kemme <tylerkemme@gmail.com>',
 		} ) )
 		.pipe( gulp.dest( 'languages/' ) )
 );
