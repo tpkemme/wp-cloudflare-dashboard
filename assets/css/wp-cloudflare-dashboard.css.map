@@ -1,0 +1,9 @@
+{
+	"version": 3,
+	"file": "wp-cloudflare-dashboard.css",
+	"sources": [
+		"sass/styles.scss"
+	],
+	"names": [],
+	"mappings": "AAAA;;;;;;GAMG;AACH,OAAO,CAAP,kBAAO"
+}

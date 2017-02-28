@@ -1,17 +1,17 @@
 <?php
 /**
  * Plugin Name: WP Cloudflare Dashboard
- * Plugin URI:  https://wplove.io
+ * Plugin URI:  https://tacticalwp.com
  * Description: A Cloudflare Analytics Dashboard for Wordpress.
  * Version:     0.1.0
  * Author:      Tyler Kemme
  * Author URI:  https://tylerkemme.com
- * Donate link: https://wplove.io
+ * Donate link: https://tacticalwp.com
  * License:     MIT
  * Text Domain: wp-cloudflare-dashboard
  * Domain Path: /languages
  *
- * @link https://wplove.io
+ * @link https://tacticalwp.com
  *
  * @package WP Cloudflare Dashboard
  * @version 0.1.0
@@ -107,6 +107,22 @@ final class WP_Cloudflare_Dashboard {
 	protected $options;
 
 	/**
+	 * Instance of WPCD_Cloudclient
+	 *
+	 * @since0.1.0
+	 * @var WPCD_Cloudclient
+	 */
+	protected $cloudclient;
+
+	/**
+	 * Instance of WPCD_Assets
+	 *
+	 * @since0.1.0
+	 * @var WPCD_Assets
+	 */
+	protected $assets;
+
+	/**
 	 * Creates or returns an instance of this class.
 	 *
 	 * @since  0.0.0
@@ -140,6 +156,8 @@ final class WP_Cloudflare_Dashboard {
 	public function plugin_classes() {
 		// Attach other plugin classes to the base plugin class.
 		$this->options = new WPCD_Options( $this );
+		$this->cloudclient = new WPCD_Cloudclient( $this );
+		$this->assets = new WPCD_Assets( $this );
 	} // END OF PLUGIN CLASSES FUNCTION
 
 	/**
@@ -291,6 +309,8 @@ final class WP_Cloudflare_Dashboard {
 			case 'url':
 			case 'path':
 			case 'options':
+			case 'cloudclient':
+			case 'assets':
 				return $this->$field;
 			default:
 				throw new Exception( 'Invalid ' . __CLASS__ . ' property: ' . $field );

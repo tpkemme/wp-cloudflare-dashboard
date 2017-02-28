@@ -1,7 +1,7 @@
 {
   "generator-plugin-wp": {
     "name": "WP Cloudflare Dashboard",
-    "homepage": "https://wplove.io",
+    "homepage": "https://tacticalwp.com",
     "description": "A Cloudflare Analytics Dashboard for Wordpress.",
     "version": "0.0.0",
     "author": "Tyler Kemme",

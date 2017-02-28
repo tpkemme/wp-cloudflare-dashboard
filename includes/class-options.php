@@ -131,6 +131,9 @@ class WPCD_Options {
 	 */
 	public function add_options_page_metabox() {
 
+		// hook in our save notices
+		add_action( "cmb2_save_options-page_fields_{$this->metabox_id}", array( $this, 'settings_notices' ), 10, 2 );
+
 		$cmb = new_cmb2_box( array(
 			'id'         => $this->metabox_id,
 			'hookup'     => false,
@@ -158,7 +161,74 @@ class WPCD_Options {
 			'id'      => 'cloudflare_api_key',
 			'type'    => 'text',
 			'default' => __( '', 'wpcd' ),
+			'after'   => '<br><input type="submit" name="test-cloudflare-creds" value="Test Connection" class="button-secondary"><p class="cmb2-metabox-description">Make sure you save your credentials before testing</p>'
 		) );
 
 	}
+
+	/**
+	 * Register settings notices for display
+	 *
+	 * @since  0.1.0
+	 * @param  int   $object_id Option key
+	 * @param  array $updated   Array of updated fields
+	 * @return void
+	 */
+	public function settings_notices( $object_id, $updated ) {
+		if ( $object_id !== $this->key || empty( $updated ) ) {
+			return;
+		}
+		add_settings_error( $this->key . '-notices', '', __( 'Settings updated.', 'wpcd' ), 'updated' );
+		settings_errors( $this->key . '-notices' );
+	}
+
+	/**
+	 * Public getter method for retrieving protected/private variables
+	 * @since  0.1.0
+	 * @param  string  $field Field to retrieve
+	 * @return mixed          Field value or exception is thrown
+	 */
+	public function __get( $field ) {
+		// Allowed fields to retrieve
+		if ( in_array( $field, array( 'key', 'metabox_id', 'title', 'options_page' ), true ) ) {
+			return $this->{$field};
+		}
+		throw new Exception( 'Invalid property: ' . $field );
+	}
 }
+
+/**
+ * Helper function to get/return the WPCD_Options object
+ * @since  0.1.0
+ * @return WPCD_Options object
+ */
+function wpcd_options() {
+	$wpcd = WP_Cloudflare_Dashboard::get_instance();
+	return $wpcd->options;
+}
+
+/**
+ * Wrapper function around cmb2_get_option
+ * @since  0.1.0
+ * @param  string  $key Options array key
+ * @return mixed        Option value
+ */
+function wpcd_get_option( $key = '', $default = null ) {
+	$opt_key = wpcd_options()->key;
+	if ( function_exists( 'cmb2_get_option' ) ) {
+		// Use cmb2_get_option as it passes through some key filters.
+		return cmb2_get_option( $opt_key, $key, $default );
+	}
+	// Fallback to get_option if CMB2 is not loaded yet.
+	$opts = get_option( $opt_key, $key, $default );
+	$val = $default;
+	if ( 'all' == $key ) {
+		$val = $opts;
+	} elseif ( array_key_exists( $key, $opts ) && false !== $opts[ $key ] ) {
+		$val = $opts[ $key ];
+	}
+	return $val;
+}
+
+// Get it started
+wpcd_options();

@@ -2,10 +2,10 @@
 # This file is distributed under the MIT.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Cloudflare Dashboard 0.0.0\n"
+"Project-Id-Version: WP Cloudflare Dashboard 0.1.0\n"
 "Report-Msgid-Bugs-To: "
 "https://wordpress.org/support/plugin/wp-cloudflare-dashboard\n"
-"POT-Creation-Date: 2017-02-22 13:25:25+00:00\n"
+"POT-Creation-Date: 2017-02-28 06:26:34+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,23 +18,27 @@ msgstr ""
 msgid "Cloudflare Dashboard"
 msgstr ""
 
-#: includes/class-options.php:147
+#: includes/class-options.php:150
 msgid "Cloudflare Email Address"
 msgstr ""
 
-#: includes/class-options.php:148
+#: includes/class-options.php:151
 msgid "Email address associated with your Cloudflare account."
 msgstr ""
 
-#: includes/class-options.php:156
+#: includes/class-options.php:159
 msgid "Cloudflare API Key"
 msgstr ""
 
-#: includes/class-options.php:157
+#: includes/class-options.php:160
 msgid "API Key associated with your Cloudflare account."
 msgstr ""
 
-#: wp-cloudflare-dashboard.php:257
+#: includes/class-options.php:181
+msgid "Settings updated."
+msgstr ""
+
+#: wp-cloudflare-dashboard.php:275
 msgid ""
 "WP Cloudflare Dashboard is missing requirements and has been <a "
 "href=\"%s\">deactivated</a>. Please make sure all requirements are "
@@ -46,7 +50,7 @@ msgid "WP Cloudflare Dashboard"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
-msgid "https://wplove.io"
+msgid "https://tacticalwp.com"
 msgstr ""
 
 #. Description of the plugin/theme
