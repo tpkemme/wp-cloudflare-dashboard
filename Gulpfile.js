@@ -33,7 +33,7 @@ const paths = {
 	'css': [ './*.css', '!*.min.css' ],
 	'icons': 'assets/images/svg-icons/*.svg',
 	'images': [ 'assets/images/*', '!assets/images/*.svg' ],
-	'php': [ './*.php', './**/*.php' ],
+	'php': [ './*.php', './**/*.php', '!vendor/**' ],
 	'sass': 'assets/css/sass/*.scss',
 	'concat_scripts': 'assets/scripts/concat/*.js',
 	'scripts': [ 'assets/scripts/*.js', 'assets/js/*.js', '!assets/scripts/*.min.js' ],
@@ -280,7 +280,7 @@ gulp.task( 'wp-pot', [ 'clean:pot' ], () =>
 			'bugReport': 'https://tylerkemme.com',
 			'lastTranslator': 'Tyler Kemme <tylerkemme@gmail.com>',
 		} ) )
-		.pipe( gulp.dest( 'languages/' ) )
+		.pipe( gulp.dest( 'languages/wp-cloudflare-dashboard.pot' ) )
 );
 
 /**
