@@ -56,8 +56,6 @@
     "load-grunt-tasks": "latest"
   },
   "scripts": {
-    "test": "phpunit",
-    "preversion": "npm test",
     "version": "grunt version && auto-changelog --package && git add -A"
   }
 }
