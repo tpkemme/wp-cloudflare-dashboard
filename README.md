@@ -35,10 +35,10 @@ Use the `npm version` command to increment the version number for the plugin acr
 The typical developer's workflow looks something like this:
 
 	1. Add and push any changes made to the repo
-		`git add -A && git commit -m "example commit" && git push origin master`
+		`git add -A && git commit -m "example commit"`
 
 	2. Update the version
-		`npm version minor`
+		`npm version minor && git push origin master`
 
 	3. Create a new distribution release
 		`composer dist`
