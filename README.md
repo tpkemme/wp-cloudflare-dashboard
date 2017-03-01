@@ -1,24 +1,46 @@
 # WP Cloudflare Dashboard #
 **Contributors:**      Tyler Kemme  
 **Requires at least:** 4.4  
-**Tested up to:**      4.7.2 
+**Tested up to:**      4.7.2
 **Stable tag:**        0.3.1  
-**License:**           MIT  
+**License:**           GPLv2  
 **License URI:**       http://www.gnu.org/licenses/gpl-2.0.html  
 
 ## Description ##
 
-A Cloudflare Analytics Dashboard for Wordpress.
+A Cloudflare Analytics Dashboard for Wordpress.  Simply enter your Cloudflare Email Address and Cloudflare API Key and you can access the analytics dashboards for each of your sites on Cloudflare.
 
 ## Installation ##
 
-### Manual Installation ###
+### Installation through Wordpress ###
 
-1. Upload the entire `/wp-cloudflare-dashboard` directory to the `/wp-content/plugins/` directory.
-2. Activate WP Cloudflare Dashboard through the 'Plugins' menu in WordPress.
+1. Download the latest release
 
-## Frequently Asked Questions ##
+2. Upload the entire `/wp-cloudflare-dashboard` directory to the `/wp-content/plugins/` directory OR upload the plugin using the Wordpress 'Plugins' menu.
 
+3. Activate WP Cloudflare Dashboard through the 'Plugins' menu in WordPress.
+
+### Installation for Developers ###
+
+1. Clone the repository to `/wp-content/plugins`
+	`git clone https://github.com/tpkemme/wp-cloudflare-dashboard.git`
+
+2. Install dependencies with composer and npm
+	`composer install && npm install --only=dev`
+
+## Contributing ##
+
+Use the `npm version` command to increment the version number for the plugin across all files.  The command `composer dist` can be used to create a new 'dist' branch.  The 'dist' branch contains only the files necessary for the functionality of the plugin. All development files are removed from the 'master' branch to create the 'dist' branch.
+
+The typical developer's workflow looks something like this:
+
+	1. Add and push any changes made to the repo
+		`git add -A && git commit -m "example commit" && git push origin master`
+
+	2. Update the version
+		`npm version minor`
+
+	3. Create a new distribution release
+		`composer dist`
 
 ## Screenshots ##
-

@@ -7,7 +7,7 @@
     "name": "Tyler Kemme",
     "url": "https://tylerkemme.com"
   },
-  "license": "MIT",
+  "license": "GPLv2",
   "devDependencies": {
     "auto-changelog": "^0.3.1",
     "autoprefixer": "latest",
