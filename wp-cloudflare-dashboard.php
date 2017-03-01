@@ -1,12 +1,12 @@
 <?php
 /**
  * Plugin Name: WP Cloudflare Dashboard
- * Plugin URI:  https://tacticalwp.com
+ * Plugin URI:  https://tylerkemme.com
  * Description: A Cloudflare Analytics Dashboard for Wordpress.
  * Version:     0.3.1
  * Author:      Tyler Kemme
  * Author URI:  https://tylerkemme.com
- * Donate link: https://tacticalwp.com
+ * Donate link: https://tylerkemme.com
  * License:     MIT
  * Text Domain: wp-cloudflare-dashboard
  * Domain Path: /languages
