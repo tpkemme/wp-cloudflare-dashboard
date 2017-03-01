@@ -97,7 +97,7 @@ class WPCD_Assets {
 		    wp_enqueue_script( 'jquery-ui-selectmenu' );	// enqueue jQuery UI Selectmenu
 			wp_enqueue_script( 'c3_js', plugins_url( 'assets/bower/c3/c3.min.js', dirname(__FILE__) ) );
 			wp_enqueue_script( 'd3_js', plugins_url( 'assets/bower/d3/d3.min.js', dirname(__FILE__) ) );
-			wp_enqueue_script( 'wpcd_admin_js', plugins_url( 'assets/js/wp-cloudflare-dashboard.min.js', dirname(__FILE__) ) );
+			wp_enqueue_script( 'wpcd_admin_js', plugins_url( 'assets/scripts/wp-cloudflare-dashboard.min.js', dirname(__FILE__) ) );
 		}
 		else{
 			return;
