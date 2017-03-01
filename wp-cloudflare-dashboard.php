@@ -3,7 +3,7 @@
  * Plugin Name: WP Cloudflare Dashboard
  * Plugin URI:  https://tylerkemme.com
  * Description: A Cloudflare Analytics Dashboard for Wordpress.
- * Version:     0.3.1
+ * Version:     0.3.2
  * Author:      Tyler Kemme
  * Author URI:  https://tylerkemme.com
  * Donate link: https://tylerkemme.com
@@ -14,7 +14,7 @@
  * @link https://tacticalwp.com
  *
  * @package WP Cloudflare Dashboard
- * @version 0.3.1
+ * @version 0.3.2
  */
 
 /**
@@ -56,7 +56,7 @@ final class WP_Cloudflare_Dashboard {
 	 * @var  string
 	 * @since  0.0.0
 	 */
-	const VERSION = '0.3.1';
+	const VERSION = '0.3.2';
 
 	/**
 	 * URL of plugin directory
