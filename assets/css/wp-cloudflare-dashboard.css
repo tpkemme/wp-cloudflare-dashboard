@@ -120,8 +120,8 @@ ul.ui-tabs-nav li a {
   width: 81.5%; }
 
 .ui-tabs .ui-tabs-nav {
-  padding: .2em .2em 0;
-  margin: -15px -15px 0;
+  padding: 0em 0em 0 !important;
+  margin: -15px -19px 0 -15px !important;
   border-radius: 0;
   border: none;
   background: #f1f1f1; }
