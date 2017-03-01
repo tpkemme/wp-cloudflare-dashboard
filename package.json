@@ -56,6 +56,6 @@
     "load-grunt-tasks": "latest"
   },
   "scripts": {
-    "version": "grunt version && auto-changelog --package && git add -A"
+    "version": "grunt version && git add -A"
   }
 }

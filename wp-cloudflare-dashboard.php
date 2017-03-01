@@ -123,6 +123,14 @@ final class WP_Cloudflare_Dashboard {
 	protected $assets;
 
 	/**
+	 * Instance of WPCD_Analytics
+	 *
+	 * @since0.2.0
+	 * @var WPCD_Analytics
+	 */
+	protected $analytics;
+
+	/**
 	 * Creates or returns an instance of this class.
 	 *
 	 * @since  0.0.0

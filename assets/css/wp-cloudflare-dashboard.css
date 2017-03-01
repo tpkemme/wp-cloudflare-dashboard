@@ -5,6 +5,210 @@
  * Copyright (c) 2017 Tyler Kemme
  * Licensed under the GPLv2+ license.
  */
-@import url(sass/cmb2.css);
+/**
+ * WP Cloudflare Dashboard
+ * https://tacticalwp.com
+ *
+ * Copyright (c) 2017 Tyler Kemme
+ * Licensed under the GPLv2+ license.
+ */
+.cmb-row {
+  padding: 7px 25px !important; }
+
+.cmb-td {
+  float: none !important;
+  display: inline-block;
+  width: 64%; }
+
+.cmb-th {
+  display: inline-block;
+  width: 33% !important; }
+
+.cmb-th label {
+  font-size: 15px;
+  font-weight: 700; }
+
+.cmb2-metabox.cmb-field-list .cmb-row.cmb-type-title {
+  padding: 8px 12px;
+  margin: 0;
+  margin-top: 10px;
+  line-height: 1.4;
+  border: 1px solid #e5e5e5;
+  border-bottom: 1px solid #eee; }
+
+.cmb2-metabox.cmb-field-list .cmb-row {
+  background: #fff;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+  padding: 0 12px;
+  border: 1px solid #e5e5e5;
+  margin-top: -1px; }
+
+.cmb2-metabox.cmb-field-list .cmb-th {
+  font-weight: initial; }
+
+.cmb2-metabox.cmb-field-list .cmb2-metabox-title {
+  margin: 0;
+  padding: 0; }
+
+.cmb-form .button-primary {
+  margin-top: 20px; }
+
+.cmb2-options-page > h2 {
+  padding: 10px 0px !important; }
+
+.cmb2-analytics {
+  background: #fff;
+  padding: 20px 15px;
+  border: none;
+  margin: 10px -4px; }
+
+.cmb2-analytics-data {
+  max-width: 97.5%;
+  padding: 20px 0; }
+
+.cmb2-analytics-data svg {
+  overflow: visible !important; }
+
+.cmb2-id-cloudflare-email-address {
+  margin-bottom: 15px !important; }
+
+/**
+ * WP Cloudflare Dashboard
+ * https://tacticalwp.com
+ *
+ * Copyright (c) 2017 Tyler Kemme
+ * Licensed under the GPLv2+ license.
+ */
+ul.ui-tabs-nav {
+  overflow: visible;
+  margin-bottom: -14px; }
+
+.ui-tabs-panel {
+  z-index: 0;
+  display: block;
+  padding: 1em 1.4em !important;
+  background: white;
+  margin: 0px -15px;
+  position: relative;
+  border: 1px solid #aaa !important; }
+
+ul.ui-tabs-nav li {
+  display: inline-block;
+  padding: 20px 0;
+  width: calc( 20% - 5px);
+  text-align: center;
+  border: 1px solid #e5e5e5;
+  margin: 0; }
+
+ul.ui-tabs-nav li.ui-state-active {
+  border-bottom-color: #ffffff;
+  position: relative;
+  z-index: 1;
+  box-shadow: none; }
+
+ul.ui-tabs-nav li:focus {
+  outline-style: none; }
+
+.ui-tabs-anchor span:focus {
+  outline: none; }
+
+ul.ui-tabs-nav li a {
+  font-size: 22px;
+  font-weight: 300;
+  text-decoration: none;
+  font-family: 'Helvetica Neue';
+  width: 81.5%; }
+
+.ui-tabs .ui-tabs-nav {
+  padding: .2em .2em 0;
+  margin: -15px -15px 0;
+  border-radius: 0;
+  border: none;
+  background: #f1f1f1; }
+
+#analytics-tabs {
+  border: none !important;
+  padding-bottom: 0px !important; }
+
+a.ui-tabs-anchor:focus {
+  outline: none !important; }
+
+.ui-tabs-anchor:focus {
+  outline: none;
+  box-shadow: none; }
+
+/**
+ * WP Cloudflare Dashboard
+ * https://tacticalwp.com
+ *
+ * Copyright (c) 2017 Tyler Kemme
+ * Licensed under the GPLv2+ license.
+ */
+h2 {
+  margin: 30px 0 0 0; }
+
+fieldset {
+  border: 0; }
+
+label {
+  display: block; }
+
+/* select with custom icons */
+.ui-selectmenu-menu .ui-menu.customicons .ui-menu-item-wrapper {
+  padding: 0.5em 0 0.5em 3em; }
+
+.ui-selectmenu-menu .ui-menu.customicons .ui-menu-item .ui-icon {
+  height: 24px;
+  width: 24px;
+  top: 0.1em; }
+
+.ui-icon.status-green {
+  background-image: url("../images/status-green.png") !important;
+  background-size: contain; }
+
+.ui-icon.status-yellow {
+  background-image: url("../images/status-yellow.png") !important;
+  background-size: contain; }
+
+.ui-icon.status-red {
+  background-image: url("../images/status-red.png") !important;
+  background-size: contain; }
+
+/* select with CSS avatar icons */
+option.avatar {
+  background-repeat: no-repeat !important;
+  padding-left: 20px; }
+
+.avatar .ui-icon {
+  background-position: left top; }
+
+#zoneSelect-button,
+#timeSelect-button {
+  min-width: 250px;
+  margin: 10px 0px; }
+
+#zoneSelect-button:focus,
+#timeSelect-button:focus {
+  outline: none; }
+
+#timeSelect-menu li .ui-icon {
+  display: none; }
+
+#timeSelect-menu li {
+  padding-left: 1em; }
+
+.cmb-analytics-form #filter-select-form {
+  margin-bottom: 10px; }
+
+.cmb-analytics-form #filter-select-form, .cmb-analytics-form #analytics-tabs {
+  background: #fff;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+  padding: 15px 15px;
+  border: 1px solid #e5e5e5; }
+
+#filter-select-form fieldset {
+  border: 0;
+  display: inline-block;
+  width: 49%; }
 
 /*# sourceMappingURL=wp-cloudflare-dashboard.css.map */

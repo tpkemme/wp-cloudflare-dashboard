@@ -1,66 +1,32 @@
-# Copyright (C) 2017 Tyler Kemme
-# This file is distributed under the MIT.
+# Copyright (C) 2017 wp-cloudflare-dashboard
+# This file is distributed under the same license as the wp-cloudflare-dashboard package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Cloudflare Dashboard 0.1.0\n"
-"Report-Msgid-Bugs-To: "
-"https://wordpress.org/support/plugin/wp-cloudflare-dashboard\n"
-"POT-Creation-Date: 2017-02-28 07:08:43+00:00\n"
+"Project-Id-Version: wp-cloudflare-dashboard\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2017-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"X-Generator: grunt-wp-i18n1.0.0\n"
+"Last-Translator: Tyler Kemme <tylerkemme@gmail.com>\n"
+"Report-Msgid-Bugs-To: https://tylerkemme.com\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: includes/class-options.php:66
+#: wp-cloudflare-dashboard.php:283
+msgid "WP Cloudflare Dashboard is missing requirements and has been <a href=\"%s\">deactivated</a>. Please make sure all requirements are available."
+msgstr ""
+
+#: includes/class-options.php:81
 msgid "Cloudflare Dashboard"
 msgstr ""
 
-#: includes/class-options.php:150
-msgid "Cloudflare Email Address"
+#: includes/class-options.php:124
+msgid "Cloudflare Dashboard Settings"
 msgstr ""
 
-#: includes/class-options.php:151
-msgid "Email address associated with your Cloudflare account."
-msgstr ""
-
-#: includes/class-options.php:159
-msgid "Cloudflare API Key"
-msgstr ""
-
-#: includes/class-options.php:160
-msgid "API Key associated with your Cloudflare account."
-msgstr ""
-
-#: includes/class-options.php:181
-msgid "Settings updated."
-msgstr ""
-
-#: wp-cloudflare-dashboard.php:275
-msgid ""
-"WP Cloudflare Dashboard is missing requirements and has been <a "
-"href=\"%s\">deactivated</a>. Please make sure all requirements are "
-"available."
-msgstr ""
-
-#. Plugin Name of the plugin/theme
-msgid "WP Cloudflare Dashboard"
-msgstr ""
-
-#. Plugin URI of the plugin/theme
-msgid "https://tacticalwp.com"
-msgstr ""
-
-#. Description of the plugin/theme
-msgid "A Cloudflare Analytics Dashboard for Wordpress."
-msgstr ""
-
-#. Author of the plugin/theme
-msgid "Tyler Kemme"
-msgstr ""
-
-#. Author URI of the plugin/theme
-msgid "https://tylerkemme.com"
+#: includes/class-options.php:125
+msgid "Settings"
 msgstr ""

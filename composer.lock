@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "4af83c5b58488106ee5087478a1c4eda",
+    "content-hash": "f6a4829dc1dfc1f62730b205ecf17a2b",
     "packages": [
         {
             "name": "composer/installers",
@@ -85,12 +85,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "6a99df94a22f01b4b9c32ed8789cf30d05bdba92"
+                "reference": "7ca811c453ad2c7fb3e94058ae7d244ade0c98c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/6a99df94a22f01b4b9c32ed8789cf30d05bdba92",
-                "reference": "6a99df94a22f01b4b9c32ed8789cf30d05bdba92",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/7ca811c453ad2c7fb3e94058ae7d244ade0c98c2",
+                "reference": "7ca811c453ad2c7fb3e94058ae7d244ade0c98c2",
                 "shasum": ""
             },
             "require": {
@@ -142,7 +142,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2017-02-19 15:59:27"
+            "time": "2017-02-28 21:26:42"
         },
         {
             "name": "guzzlehttp/promises",
@@ -201,12 +201,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "04a6d1a00ea5da0727ee94309a9f0d3dbaecb569"
+                "reference": "0d6c7ca039329247e4f0f8f8f6506810e8248855"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/04a6d1a00ea5da0727ee94309a9f0d3dbaecb569",
-                "reference": "04a6d1a00ea5da0727ee94309a9f0d3dbaecb569",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/0d6c7ca039329247e4f0f8f8f6506810e8248855",
+                "reference": "0d6c7ca039329247e4f0f8f8f6506810e8248855",
                 "shasum": ""
             },
             "require": {
@@ -258,7 +258,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2017-02-21 01:20:32"
+            "time": "2017-02-27 10:51:17"
         },
         {
             "name": "psr/http-message",
@@ -312,16 +312,16 @@
         },
         {
             "name": "webdevstudios/cmb2",
-            "version": "v2.2.3.1",
+            "version": "v2.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/WebDevStudios/CMB2.git",
-                "reference": "17677cf3aa65b0402ca8084b6b1cf37df6260582"
+                "reference": "badecc7f908781ac14b879c74526f9d055f4a41e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WebDevStudios/CMB2/zipball/17677cf3aa65b0402ca8084b6b1cf37df6260582",
-                "reference": "17677cf3aa65b0402ca8084b6b1cf37df6260582",
+                "url": "https://api.github.com/repos/WebDevStudios/CMB2/zipball/badecc7f908781ac14b879c74526f9d055f4a41e",
+                "reference": "badecc7f908781ac14b879c74526f9d055f4a41e",
                 "shasum": ""
             },
             "require": {
@@ -353,7 +353,7 @@
                 "plugin",
                 "wordpress"
             ],
-            "time": "2016-11-08T15:24:55+00:00"
+            "time": "2017-02-27T15:05:31+00:00"
         }
     ],
     "packages-dev": [],

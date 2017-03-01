@@ -14,5 +14,6 @@
     "tests"
   ],
   "dependencies": {
+    "c3": "^0.4.11"
   }
 }
