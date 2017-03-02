@@ -1,7 +1,7 @@
 {
   "name": "wp-cloudflare-dashboard",
   "title": "WP Cloudflare Dashboard",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "A Cloudflare Analytics Dashboard for Wordpress.",
   "author": {
     "name": "Tyler Kemme",
