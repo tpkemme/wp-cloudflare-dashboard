@@ -1,13 +1,74 @@
 /**
- * WP Cloudflare Dashboard
- * https://tacticalwp.com
+ * WP Cloudflare Dashboard tabs
+ *
+ * Styles for Jquery UI tabs
+ *
+ * https://tylerkemme.com
  *
  * Copyright (c) 2017 Tyler Kemme
  * Licensed under the GPLv2+ license.
- */
-ul.ui-tabs-nav {
+*/
+.ui-tabs .ui-tabs-nav {
 	overflow: visible;
-	margin-bottom: -14px;
+	padding: 0 0 0!important;
+	margin: -15px -29px 0 -15px!important;
+	border-radius: 0;
+	border: none;
+	background: #f1f1f1;
+	outline: none;
+	box-shadow: none;
+
+	li.ui-state-active {
+		margin-bottom: 0;
+		position: relative;
+		z-index: 3;
+		top: 1px;
+		box-shadow: none !important;
+		outline: none !important;
+		border: 1px solid #aaa;
+		border-bottom-color: white;
+	}
+
+	li {
+		display: inline-block;
+		padding: 8px 0 !important;
+		width: calc( 20% - 5px );
+		text-align: center;
+		border: 1px solid #d5d5d5;
+		margin: 0;
+
+		&:active, .ui-state-active {
+			margin-bottom: 0;
+			position: relative;
+			z-index: 3;
+			top: 1px;
+			box-shadow: none !important;
+			outline: none !important;
+			border: 1px solid #aaa;
+			border-bottom-color: white;
+		}
+
+		&:focus{
+			outline-style: none;
+		}
+
+		a.ui-tabs-anchor {
+		    font-size: 22px;
+		    font-weight: 300;
+		    text-decoration: none;
+		    font-family: 'Helvetica Neue';
+			width: 81.5%;
+			&:focus{
+				outline: none;
+				box-shadow: none;
+			}
+			span{
+				&:focus{
+					outline: none;
+				}
+			}
+		}
+	}
 }
 
 .ui-tabs-panel {
@@ -18,61 +79,4 @@ ul.ui-tabs-nav {
     margin: 0px -15px;
     position: relative;
 	border: 1px solid #aaa !important;
-}
-
-ul.ui-tabs-nav li {
-	display: inline-block;
-	padding: 20px 0;
-	width: calc( 20% - 5px );
-	text-align: center;
-	border: 1px solid #e5e5e5;
-	margin: 0;
-}
-ul.ui-tabs-nav li.ui-state-active {
-	//background: #ffffff;
-	border-bottom-color: #ffffff;
-	position: relative;
-	z-index: 1;
-	box-shadow: none;
-}
-ul.ui-tabs-nav li:hover:not(.ui-state-active) {
-	//background: #ffffff;
-}
-
-ul.ui-tabs-nav li:focus {
-    outline-style: none;
-}
-
-.ui-tabs-anchor span:focus {
-    outline: none;
-}
-
-ul.ui-tabs-nav li a {
-    font-size: 22px;
-    font-weight: 300;
-    text-decoration: none;
-    font-family: 'Helvetica Neue';
-	width: 81.5%;
-}
-
-.ui-tabs .ui-tabs-nav {
-	padding: 0em 0em 0 !important;
-    margin: -15px -19px 0 -15px !important;
-    border-radius: 0;
-    border: none;
-    background: #f1f1f1;
-}
-
-#analytics-tabs{
-	border: none !important;
-	padding-bottom: 0px !important;
-}
-
-a.ui-tabs-anchor:focus {
-    outline: none !important;
-}
-
-.ui-tabs-anchor:focus {
-    outline: none;
-    box-shadow: none;
 }

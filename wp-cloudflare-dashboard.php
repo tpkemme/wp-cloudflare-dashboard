@@ -11,7 +11,7 @@
  * Text Domain: wp-cloudflare-dashboard
  * Domain Path: /languages
  *
- * @link https://tacticalwp.com
+ * @link https://tylerkemme.com
  *
  * @package WP Cloudflare Dashboard
  * @version 0.3.2
@@ -38,7 +38,6 @@
 /**
  * Built using generator-plugin-wp
  */
-
 
 // User composer autoload.
 require 'vendor/autoload.php';

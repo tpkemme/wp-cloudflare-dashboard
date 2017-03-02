@@ -2,7 +2,7 @@
 	"name": "wp-cloudflare-dashboard",
 	"description": "A Cloudflare Analytics Dashboard for Wordpress.",
 	"keywords": ["wordpress", "plugin", "generator-plugin-wp"],
-	"homepage": "https://tacticalwp.com",
+	"homepage": "https://tylerkemme.com",
 	"license": "GPLv2",
 	"authors": [
 	{

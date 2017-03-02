@@ -1,5 +1,5 @@
 # WP Cloudflare Dashboard Includes #
-https://tacticalwp.com
+https://tylerkemme.com
 Copyright (c) 2017 Tyler Kemme
 Licensed under the MIT license.
 

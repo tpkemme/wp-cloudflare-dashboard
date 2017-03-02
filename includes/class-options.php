@@ -354,19 +354,27 @@ function wpcd_options() {
  * @return mixed        Option value
  */
 function wpcd_get_option( $key = '', $default = null ) {
+
 	$opt_key = wpcd_options()->key;
+
 	if ( function_exists( 'cmb2_get_option' ) ) {
 		// Use cmb2_get_option as it passes through some key filters.
 		return cmb2_get_option( $opt_key, $key, $default );
 	}
+
 	// Fallback to get_option if CMB2 is not loaded yet.
 	$opts = get_option( $opt_key, $key, $default );
 	$val = $default;
+
+	if( strcmp( gettype( $opts ), 'string') == 0 ){
+		$opts = array( $opts );
+	}
 	if ( 'all' == $key ) {
 		$val = $opts;
 	} elseif ( array_key_exists( $key, $opts ) && false !== $opts[ $key ] ) {
 		$val = $opts[ $key ];
 	}
+
 	return $val;
 }
 

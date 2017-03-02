@@ -1,6 +1,6 @@
 /**
  * WP Cloudflare Dashboard
- * https://tacticalwp.com
+ * https://tylerkemme.com
  *
  * Licensed under the GPLv2+ license.
  */
@@ -31,11 +31,19 @@ window.WPCloudflareDashboard = window.WPCloudflareDashboard || {};
 
 			event.preventDefault();
 
+			if ( $( '#green-success-connection' ).length ) {
+				$( '#green-success-connection' ).remove();
+			}
+
+			if ( $( '#red-error-connection' ).length ) {
+				$( '#red-error-connection' ).remove();
+			}
+
 			jQuery.post( '/wp-admin/admin-ajax.php', data, function( response ) {
 				if ( '200' === response ) {
-					$( '<span style="color: #00ff00;">✓ Success</span>' ).appendTo( $( 'input[name="test-cloudflare-creds"]' ).closest( '.cmb-td' ) );
+					$( '<span id="green-success-connection"><span style="font-size: 20px;">✓</span> Connection successful</span>' ).insertAfter( $( 'input[name="test-cloudflare-creds"]' ) );
 				} else {
-					$( '<span style="color: red;">X Error: Connection to Cloudflare unsuccessful.</span>' ).appendTo( $( 'input[name="test-cloudflare-creds"]' ).closest( '.cmb-td' ) );
+					$( '<span id="red-error-connection"><span style="font-size: 20px;">⨂</span> Connection unsuccessful.</span>' ).insertAfter( $( 'input[name="test-cloudflare-creds"]' ) );
 				}
 			});
 

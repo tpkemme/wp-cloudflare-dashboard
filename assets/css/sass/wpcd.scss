@@ -1,0 +1,84 @@
+/**
+ * WP Cloudflare Dashboard Styles
+ *
+ * Styles specifically for this plugin and its parts
+ *
+ * https://tylerkemme.com
+ *
+ * Copyright (c) 2017 Tyler Kemme
+ * Licensed under the GPLv2+ license.
+*/
+#analytics-tabs {
+	background: #fff;
+	box-shadow: 0 1px 1px rgba(0,0,0,.04);
+	padding: 15px 15px 0;
+	border: 1px solid #e5e5e5;
+}
+
+fieldset {
+	border: 0;
+}
+
+#filter-select-form {
+	margin-bottom: 10px;
+	background: #fff;
+	box-shadow: 0 1px 1px rgba(0,0,0,.04);
+	padding: 15px 15px;
+	border: 1px solid #e5e5e5;
+
+	fieldset {
+	    border: 0;
+	    display: inline-block;
+	    width: 49%;
+	}
+}
+
+#green-success-connection {
+    color: #00ce00;
+    background: #ddffdd;
+    padding: 7px 20px;
+    border: 1px solid #00ce00;
+	position: relative;
+	margin: 0px 0 0 15px;
+	top: -1px;
+}
+
+h2 {
+	 margin: 30px 0 0 0;
+}
+
+input:focus {
+    outline: none !important;
+}
+
+label {
+	display: block;
+}
+
+#red-error-connection {
+    color: #ec0000;
+    background: #ffdddd;
+    padding: 7px 10px;
+    border: 1px solid #ec0000;
+	position: relative;
+	margin: 0px 0 0 14px;
+	top: -1px;
+}
+
+#timeSelect-menu li {
+    padding-left: 1em;
+
+	.ui-icon {
+	    display: none;
+	}
+}
+
+#timeSelect-button,
+#zoneSelect-button {
+    min-width: 250px;
+    margin: 10px 0px;
+
+	&:focus{
+		outline: none;
+	}
+}
