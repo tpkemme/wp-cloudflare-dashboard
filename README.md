@@ -6,6 +6,9 @@
 **License:**           GPLv2  
 **License URI:**       http://www.gnu.org/licenses/gpl-2.0.html  
 
+## Demo ##
+
+![gif_demo](https://github.com/tpkemme/wp-cloudflare-dashboard/blob/master/assets/repo/wp-cloudflare-dashboard.gif)
 ## Description ##
 
 A Cloudflare Analytics Dashboard for Wordpress.  Simply enter your Cloudflare Email Address and Cloudflare API Key and you can access the analytics dashboards for each of your sites on Cloudflare.
@@ -14,7 +17,7 @@ A Cloudflare Analytics Dashboard for Wordpress.  Simply enter your Cloudflare Em
 
 ### Installation through Wordpress ###
 
-1. Download the latest release
+1. Download the [latest release](https://github.com/tpkemme/wp-cloudflare-dashboard/releases/latest)
 
 2. Upload the entire `/wp-cloudflare-dashboard` directory to the `/wp-content/plugins/` directory OR upload the plugin using the Wordpress 'Plugins' menu.
 
@@ -23,9 +26,11 @@ A Cloudflare Analytics Dashboard for Wordpress.  Simply enter your Cloudflare Em
 ### Installation for Developers ###
 
 1. Clone the repository to `/wp-content/plugins`
+	
 	`git clone https://github.com/tpkemme/wp-cloudflare-dashboard.git`
 
 2. Install dependencies with composer and npm
+	
 	`composer install && npm install --only=dev`
 
 ## Contributing ##
@@ -34,13 +39,18 @@ Use the `npm version` command to increment the version number for the plugin acr
 
 The typical developer's workflow looks something like this:
 
-	1. Add and push any changes made to the repo
-		`git add -A && git commit -m "example commit"`
+1. Add and push any changes made to the repo
 
-	2. Update the version
-		`npm version minor && git push origin master`
+	`git add -A && git commit -m "example commit"`
 
-	3. Create a new distribution release
-		`composer dist`
+2. Update the version
+
+	`npm version minor && git push origin master`
+
+3. Create a new distribution release
+
+	`composer dist`
 
 ## Screenshots ##
+
+![img_screenshot](https://github.com/tpkemme/wp-cloudflare-dashboard/blob/master/assets/repo/wp-cloudflare-screenshot.png)
