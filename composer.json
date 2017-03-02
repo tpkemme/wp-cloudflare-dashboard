@@ -26,6 +26,6 @@
 		"classmap": ["wp-cloudflare-dashboard.php", "includes/"]
 	},
 	"scripts": {
-		"dist": "git push origin dist && git branch -D dist && git push origin :dist && git checkout -B dist && rm -rf .bowerrc .editorconfig .eslintrc.js .eslintrc.json .gitignore .sass-lint.yml .yo-rc.json bower.json Gruntfile.js Gulpfile.js phpcs.xml phpunit.xml tests node_modules bin assets/README.md assets/css/sass assets/js assets/repo includes/README.md  && composer install && rm -rf .gitignore .DS_Store assets/.DS_Store && git add -A && git commit -m $(grep -m1 version package.json | awk -F: '{ print $2 }' | sed 's/[\", ]//g') && git push origin dist"
+		"dist": "git push origin dist && git branch -D dist && git push origin :dist && git checkout -B dist && rm -rf .bowerrc .editorconfig .eslintrc.js .eslintrc.json .gitignore .sass-lint.yml .yo-rc.json bower.json Gruntfile.js Gulpfile.js phpcs.xml phpunit.xml tests node_modules assets/README.md assets/css/sass assets/js assets/repo includes/README.md  && composer install && rm -rf .gitignore .DS_Store assets/.DS_Store && git add -A && git commit -m $(grep -m1 version package.json | awk -F: '{ print $2 }' | sed 's/[\", ]//g') && git push origin dist"
 	}
 }
