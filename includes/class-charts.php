@@ -49,22 +49,23 @@ class WPCD_Charts {
 				<div class="cmb2-analytics-data" id="wpcd-requests"></div>
 			</div>
 			<script type="text/javascript">
+				google.charts.setOnLoadCallback( drawRequestsChart );
+
 				function drawRequestsChart() {
 					var data = google.visualization.arrayToDataTable( <?php echo json_encode( $requests ); ?> ),
 					options = {
 						title: 'Requests',
 						hAxis: {title: 'x',  titleTextStyle: {color: '#333'}},
 						vAxis: {minValue: 0},
-						'width':600,
-						'height':400
+						width: 600,
+						height: 400
 					},
 					chart = new google.visualization.AreaChart( document.getElementById( 'wpcd-requests' ) );
 
 					chart.draw( data, options );
 
 				}
-				</script>
-			</div>
+			</script>
 		</div>
 		<?php
 	}

@@ -63,9 +63,4 @@ window.WPCloudflareDashboard = window.WPCloudflareDashboard || {};
 }( window, document, jQuery, window.WPCloudflareDashboard ) );
 
 /* global google */
-// Set chart options
-var options = {'title':'How Much Pizza I Ate Last Night',
-			   'width':400,
-			   'height':300};
 google.charts.load( 'current', { 'packages': [ 'corechart' ] });
-google.charts.setOnLoadCallback( drawRequestsChart );
