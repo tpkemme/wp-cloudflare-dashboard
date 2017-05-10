@@ -49,32 +49,22 @@ class WPCD_Charts {
 				<div class="cmb2-analytics-data" id="wpcd-requests"></div>
 			</div>
 			<script type="text/javascript">
-                
-				var chart = c3.generate({
-					bindto: '#wpcd-requests',
-					data: {
-						x: 'x',
-						xFormat: '%Y-%m-%dT%H:%M:%SZ',
-						columns: [
-							<?php echo json_encode( $requests['times'] ) ?>,
-							<?php echo json_encode( $requests['crequests'] ) ?>,
-							<?php echo json_encode( $requests['ucrequests'] ) ?>
-						],
-						types: {
-							'Uncached': 'area-spline',
-							'Cached': 'area-spline'
-						}
+				function drawRequestsChart() {
+					var data = google.visualization.arrayToDataTable( <?php echo json_encode( $requests ); ?> ),
+					options = {
+						title: 'Requests',
+						hAxis: {title: 'x',  titleTextStyle: {color: '#333'}},
+						vAxis: {minValue: 0},
+						'width':600,
+						'height':400
 					},
-					axis: {
-						x: {
-							type: 'timeseries',
-							tick: {
-								format: '%_m/%-e, %_I%p'
-							}
-						}
-					}
-				});
-			</script>
+					chart = new google.visualization.AreaChart( document.getElementById( 'wpcd-requests' ) );
+
+					chart.draw( data, options );
+
+				}
+				</script>
+			</div>
 		</div>
 		<?php
 	}
@@ -86,44 +76,27 @@ class WPCD_Charts {
 	 * @return void
 	 */
 	public static function display_bandwidth( $requests ) {
-
 		?>
 		<div id = "bandwidth">
 			<div class="cmb2-analytics">
 				<div class="cmb2-analytics-data" id="wpcd-bandwidth"></div>
 			</div>
-			<script type="text/javascript">
-				var chart = c3.generate({
-					bindto: '#wpcd-bandwidth',
-					data: {
-						x: 'x',
-						xFormat: '%Y-%m-%dT%H:%M:%SZ',
-						columns: [
-							[<?php foreach( $requests['times'] as $time ): ?>
-								 '<?php echo $time ?>',
-							<?php endforeach; ?>],
-							[<?php foreach( $requests['crequests'] as $crequest ): ?>
-								 '<?php echo $crequest ?>',
-							<?php endforeach; ?>],
-							[<?php foreach( $requests['ucrequests'] as $ucrequest ): ?>
-								 '<?php echo $ucrequest ?>',
-							<?php endforeach; ?>]
-						],
-						types: {
-							'Uncached': 'area-spline',
-							'Cached': 'area-spline'
-						}
-					},
-					axis: {
-						x: {
-							type: 'timeseries',
-							tick: {
-								format: '%_m/%-e, %_I%p'
-							}
-						}
-					}
-				});
-			</script>
+			<!-- <script type="text/javascript">
+			function drawChart() {
+				var data = google.visualization.arrayToDataTable( <?php echo json_encode( $requests ); ?> ),
+				options = {
+					title: 'Requests',
+					hAxis: {title: 'x',  titleTextStyle: {color: '#333'}},
+					vAxis: {minValue: 0},
+					'width':600,
+					'height':400
+				},
+				chart = new google.visualization.AreaChart( document.getElementById( 'wpcd-bandwidth' ) );
+
+				chart.draw( data, options );
+
+			}
+			</script> -->
 		</div>
 		<?php
 	}
@@ -140,7 +113,7 @@ class WPCD_Charts {
 			<div class="cmb2-analytics">
 				<div class="cmb2-analytics-data" id="wpcd-visitors"></div>
 			</div>
-			<script type="text/javascript">
+			<!-- <script type="text/javascript">
 				var chart = c3.generate({
 					bindto: '#wpcd-visitors',
 					data: {
@@ -167,7 +140,7 @@ class WPCD_Charts {
 						}
 					}
 				});
-			</script>
+			</script> -->
 		</div>
 		<?php
 	}
@@ -184,7 +157,7 @@ class WPCD_Charts {
 			<div class="cmb2-analytics">
 				<div class="cmb2-analytics-data" id="wpcd-threats"></div>
 			</div>
-			<script type="text/javascript">
+			<!-- <script type="text/javascript">
 				var chart = c3.generate({
 					bindto: '#wpcd-threats',
 					data: {
@@ -211,7 +184,7 @@ class WPCD_Charts {
 						}
 					}
 				});
-			</script>
+			</script> -->
 		</div>
 		<?php
 	}
@@ -228,7 +201,7 @@ class WPCD_Charts {
 			<div class="cmb2-analytics">
 				<div class="cmb2-analytics-data" id="wpcd-ssl"></div>
 			</div>
-			<script type="text/javascript">
+			<!-- <script type="text/javascript">
 				var chart = c3.generate({
 					bindto: '#wpcd-ssl',
 					data: {
@@ -259,7 +232,7 @@ class WPCD_Charts {
 						}
 					}
 				});
-			</script>
+			</script> -->
 		</div>
 		<?php
 	}

@@ -78,8 +78,8 @@ class WPCD_Analytics {
 	 * @since  0.1.0
 	 * @return void
 	 */
-	public function analytics_page_display() {
-
+	public function analytics_page_display()
+{
 		$cloudclient = $this->plugin->cloudclient;
 		$charts = $this->plugin->charts;
 		$zones = $cloudclient->wpcd_get_zones();
@@ -153,7 +153,7 @@ class WPCD_Analytics {
 				 		<?php
 							$requests = $cloudclient->wpcd_get_requests(
 								isset( $_POST['zoneSelect'] ) ? $_POST['zoneSelect'] : $zones[0]['id'],
-						 		isset( $_POST['timeSelect'] ) ? $_POST['timeSelect'] : '1440'
+								isset( $_POST['timeSelect'] ) ? $_POST['timeSelect'] : '1440'
 							);
 							$charts->display_requests( $requests );
 						?>

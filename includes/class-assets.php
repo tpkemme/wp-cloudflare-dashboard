@@ -67,15 +67,13 @@ class WPCD_Assets {
 
 			global $wp_scripts;
 
-			// Enqueue C3 styles
-			wp_enqueue_style( 'c3_css', plugins_url( 'assets/bower/c3/c3.min.css', dirname(__FILE__) ) );
+			// get the jquery ui object
+			$queryui = $wp_scripts->query('jquery-ui-core');
 
-			// tell WordPress to load the JQuery UI theme
-			wp_enqueue_style('wpcd-admin-ui-css',
-                'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/themes/ui-lightness/jquery-ui.css',
-                false,
-                $this->plugin->version,
-                false);
+			// load the jquery ui theme
+			$url = "http://ajax.googleapis.com/ajax/libs/jqueryui/".$queryui->ver."/themes/ui-lightness/jquery-ui.css";
+			wp_enqueue_style('jquery-ui-smoothness', $url, false, null);
+
 
 			// Enqueue plugin CSS
 			wp_enqueue_style( 'wpcd_admin_css', plugins_url( 'assets/css/wp-cloudflare-dashboard.min.css', dirname(__FILE__) ) );
@@ -96,11 +94,19 @@ class WPCD_Assets {
 			wp_enqueue_script( 'wpcd_admin_js', plugins_url( 'assets/scripts/wp-cloudflare-dashboard.min.js', dirname(__FILE__) ) );
         }
         if( $hook === 'toplevel_page_wp_cloudflare_dashboard_analytics' ) {
+
 			wp_enqueue_script( 'jquery-ui-core' );			// enqueue jQuery UI Core
 		    wp_enqueue_script( 'jquery-ui-tabs' );			// enqueue jQuery UI Tabs
-			wp_enqueue_script( 'd3_js', plugins_url( 'assets/bower/d3/d3.min.js', dirname(__FILE__) ) );
-			wp_enqueue_script( 'c3_js', plugins_url( 'assets/bower/c3/c3.min.js', dirname(__FILE__) ) );
-			wp_enqueue_script( 'wpcd_admin_js', plugins_url( 'assets/scripts/wp-cloudflare-dashboard.min.js', dirname(__FILE__) ) );
+
+			wp_enqueue_script( 'google_charts_js',  'https://www.gstatic.com/charts/loader.js' );
+
+			wp_enqueue_script(
+				'wpcd_admin_js',
+				plugins_url( 'assets/scripts/wp-cloudflare-dashboard.min.js', dirname(__FILE__) ),
+				array( 'google_charts_js'),
+			   	false,
+				true
+			);
 		}
 	}
 }

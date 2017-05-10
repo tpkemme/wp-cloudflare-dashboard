@@ -190,28 +190,16 @@ class WPCD_Cloudclient {
 			$timeJson = json_decode( $response['body'] )->result->timeseries;
 
 			// Array of cached requests
-			$crequests = array();
+			$requestsArray = array();
 
-			// Array of uncached requests
-			$ucrequests = array();
-
-			// Array of times
-			$times = array();
 
 			foreach( $timeJson as $tJ ){
-				array_push( $times, $tJ->since);
-				array_push( $crequests, $tJ->requests->cached );
-				array_push( $ucrequests, $tJ->requests->uncached );
+				array_push( $requestsArray, array( $tJ->since, $tJ->requests->cached, $tJ->requests->uncached ) );
 			}
-			array_unshift( $times, 'x' );
-			array_unshift( $crequests, 'Cached' );
-			array_unshift( $ucrequests, 'Uncached' );
 
-			return array(
-				'times' => $times,
-				'crequests' => $crequests,
-				'ucrequests' => $ucrequests
-			);
+			array_unshift( $requestsArray, array('x', 'Cached', 'Uncached' ) );
+
+			return $requestsArray;
 
 		}
 
