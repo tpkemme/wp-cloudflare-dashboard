@@ -29,15 +29,7 @@ class WPCD_Options {
 	 * @var    string
 	 * @since  0.0.0
 	 */
-	protected $key = 'wp_cloudflare_dashboard_analytics';
-
-	/**
-	 * Options page metabox id
-	 *
-	 * @var    string
-	 * @since  0.0.0
-	 */
-	protected $metabox_id = 'wp_cloudflare_dashboard_analytics_metabox';
+	protected $key = 'wp_cloudflare_dashboard_options';
 
 	/**
 	 * Options page metabox id
@@ -111,20 +103,19 @@ class WPCD_Options {
 	 */
 	public function add_options_page() {
 		$this->analytics_page = add_menu_page(
-			$this->title,
-			$this->title,
+			__( 'Cloudflare Dashboard Analytics', 'wp-cloudflare-dashboard' ),
+			__( 'Cloudflare Dashboard', 'wp-cloudflare-dashboard' ),
 			'manage_options',
-			$this->key,
-			array( $this, 'analytics_page_display' ),
+			'wp_cloudflare_dashboard_analytics',
+			array( $this->plugin->analytics, 'analytics_page_display' ),
 			'dashicons-cloud'
 		);
-
 		$this->options_page = add_submenu_page(
-			$this->key,
+			'wp_cloudflare_dashboard_analytics',
 			__( 'Cloudflare Dashboard Settings', 'wp-cloudflare-dashboard' ),
 			__( 'Settings', 'wp-cloudflare-dashboard' ),
 			'manage_options',
-			'wp-cloudflare-dashboard-options',
+			$this->key,
 			array( $this, 'options_page_display' )
 		);
 
@@ -143,121 +134,8 @@ class WPCD_Options {
 		?>
 		<div class="wrap cmb2-options-page <?php echo esc_attr( $this->key ); ?>">
 			<h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
-			<p class="cmb2-metabox-description">To get your API Key, login to your <a href="https://www.cloudflare.com/a/account/my-account">Cloudflare Account</a> and use your Global API Key.</p><br/>
+			<p class="cmb2-metabox-description">To get your API Key, login to your <a target="_blank" href="https://www.cloudflare.com/a/account/my-account">Cloudflare Account</a> and use your Global API Key.</p><br/>
 			<?php cmb2_metabox_form( $this->options_metabox_id, $this->key ); ?>
-		</div>
-		<?php
-	}
-
-	/**
-	 * Analytics page markup
-	 * @since  0.0.0
-	 * @return void
-	 */
-	public function analytics_page_display() {
-		?>
-		<div class="wrap cmb2-analytics-page <?php echo esc_attr( $this->key ); ?>">
-			<h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
-			<br/>
-			<div class="cmb-analytics-form">
-				<form id="filter-select-form" class="select-form" method="POST" >
-					<fieldset>
-						<label for="zoneSelect">Select a Website:</label>
-						<?php $zones = $this->plugin->cloudclient->wpcd_get_zones(); ?>
-						<select name="zoneSelect" id="zoneSelect">
-							<?php $count = 1; foreach( $zones as $zone ): ?>
-								<?php if( isset($_POST['zoneSelect'] ) && $_POST['zoneSelect'] == $zone['id'] ): ?>
-									<option selected="selected" value="<?php echo $zone['id']; ?>" data-class="<?php echo $zone['status']; ?>"><?php echo $zone['name']; ?></option>
-								<?php else: ?>
-									<option value="<?php echo $zone['id']; ?>" data-class="<?php echo $zone['status']; ?>"><?php echo $zone['name']; ?></option>
-								<?php endif; ?>
-								<?php $count++; ?>
-							<?php endforeach; ?>
-						</select>
-					</fieldset>
-					<fieldset>
-						<label for="timeSelect">Select a Time Period:</label>
-						<?php $zones = $this->plugin->cloudclient->wpcd_get_zones(); ?>
-						<select name="timeSelect" id="timeSelect">
-							<?php if( isset( $_POST['timeSelect'] ) && $_POST['timeSelect'] == '1440' ): ?>
-								<option selected="selected" value="1440" data-class="day">Last 24 Hours</option>
-							<?php else: ?>
-								<option value="1440" data-class="day">Last 24 Hours</option>
-							<?php endif; ?>
-							<?php if( isset( $_POST['timeSelect'] ) && $_POST['timeSelect'] == '10080' ): ?>
-								<option selected="selected" value="10080" data-class="week">Last Week</option>
-							<?php else: ?>
-								<option value="10080" data-class="week">Last Week</option>
-							<?php endif; ?>
-							<?php if( isset( $_POST['timeSelect'] ) && $_POST['timeSelect'] == '43200' ): ?>
-								<option selected="selected" value="43200" data-class="month">Last Month</option>
-							<?php else: ?>
-								<option value="43200" data-class="month">Last Month</option>
-							<?php endif; ?>
-							<?php if( isset( $_POST['timeSelect'] ) && $_POST['timeSelect'] == '525600' ): ?>
-								<option selected="selected" value="525600" data-class="year">Last year</option>
-							<?php else: ?>
-								<option value="525600" data-class="year">Last Year</option>
-							<?php endif; ?>
-						</select>
-					</fieldset>
-					<input type="submit" value="Filter Data" class="button-secondary" />
-				</form>
-				<div id="analytics-tabs">
-					<ul>
-					    <li><a href="#requests"><span>Requests</span></a></li>
-					    <li><a href="#bandwidth"><span>Bandwidth</span></a></li>
-					    <li><a href="#visitors"><span>Unique Visitors</span></a></li>
-					    <li><a href="#threats"><span>Threats</span></a></li>
-					    <li><a href="#ssl"><span>SSL</span></a></li>
-					</ul>
-					<div id = "requests">
-				 		<?php
-							$requests = $this->plugin->cloudclient->wpcd_get_requests(
-								isset( $_POST['zoneSelect'] ) ? $_POST['zoneSelect'] : $zones[0]['id'],
-						 		isset( $_POST['timeSelect'] ) ? $_POST['timeSelect'] : '1440'
-							);
-							WPCD_Cloudclient::display_requests( $requests );
-						?>
-					</div>
-					<div id = "bandwidth">
-						<?php
-							$requests = $this->plugin->cloudclient->wpcd_get_bandwidth(
-								isset( $_POST['zoneSelect'] ) ? $_POST['zoneSelect'] : $zones[0]['id'],
-								isset( $_POST['timeSelect'] ) ? $_POST['timeSelect'] : '1440'
- 							);
-							WPCD_Cloudclient::display_bandwidth( $requests );
-						?>
-					</div>
-					<div id = "visitors">
-						<?php
-							$visitors = $this->plugin->cloudclient->wpcd_get_visitors(
-								isset( $_POST['zoneSelect'] ) ? $_POST['zoneSelect'] : $zones[0]['id'],
-								isset( $_POST['timeSelect'] ) ? $_POST['timeSelect'] : '1440'
- 							);
-							WPCD_Cloudclient::display_visitors( $visitors );
-						?>
-					</div>
-					<div id = "threats">
-						<?php
-							$threats = $this->plugin->cloudclient->wpcd_get_threats(
-								isset( $_POST['zoneSelect'] ) ? $_POST['zoneSelect'] : $zones[0]['id'],
-								isset( $_POST['timeSelect'] ) ? $_POST['timeSelect'] : '1440'
-							);
-							WPCD_Cloudclient::display_threats( $threats );
-						?>
-					</div>
-					<div id = "ssl">
-						<?php
-							$requests = $this->plugin->cloudclient->wpcd_get_ssl(
-								isset( $_POST['zoneSelect'] ) ? $_POST['zoneSelect'] : $zones[0]['id'],
-								isset( $_POST['timeSelect'] ) ? $_POST['timeSelect'] : '1440'
-							);
-							WPCD_Cloudclient::display_ssl( $requests );
-						?>
-					</div>
-				</div>
-			</div>
 		</div>
 		<?php
 	}
@@ -300,7 +178,7 @@ class WPCD_Options {
 			'id'      => 'cloudflare_api_key',
 			'type'    => 'text',
 			'default' => __( '', 'wpcd' ),
-			'after'   => '<br><input type="submit" name="test-cloudflare-creds" value="Test Connection" class="button-secondary"><p class="cmb2-metabox-description">Make sure you save your credentials before testing</p>'
+			'after'   => '<br><input type="button" name="test-cloudflare-creds" value="Test Connection" class="button-secondary"><p class="cmb2-metabox-description">Make sure you save your credentials before testing</p>'
 		) );
 
 	}

@@ -8,12 +8,6 @@
  * Copyright (c) 2017 Tyler Kemme
  * Licensed under the GPLv2+ license.
 */
-#analytics-tabs {
-	background: #fff;
-	box-shadow: 0 1px 1px rgba(0,0,0,.04);
-	padding: 15px 15px 0;
-	border: 1px solid #e5e5e5;
-}
 
 fieldset {
 	border: 0;
@@ -73,8 +67,7 @@ label {
 	}
 }
 
-#timeSelect-button,
-#zoneSelect-button {
+#filter-button {
     min-width: 250px;
     margin: 10px 0px;
 

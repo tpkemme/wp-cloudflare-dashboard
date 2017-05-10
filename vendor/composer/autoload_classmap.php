@@ -6,7 +6,9 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'WPCD_Analytics' => $baseDir . '/includes/class-analytics.php',
     'WPCD_Assets' => $baseDir . '/includes/class-assets.php',
+    'WPCD_Charts' => $baseDir . '/includes/class-charts.php',
     'WPCD_Cloudclient' => $baseDir . '/includes/class-cloudclient.php',
     'WPCD_Options' => $baseDir . '/includes/class-options.php',
     'WP_Cloudflare_Dashboard' => $baseDir . '/wp-cloudflare-dashboard.php',

@@ -2,6 +2,8 @@
 /**
  * WP Cloudflare Dashboard Cloudclient
  *
+ * This class handles all api calls to Cloudflare
+ *
  * @since 0.1.0
  * @package WP Cloudflare Dashboard
  */
@@ -72,26 +74,27 @@ class WPCD_Cloudclient {
 	 */
 	public function test_cloudflare_creds() {
 
-		$client = new GuzzleHttp\Client();
+        if( empty( $this->cloudflare_api_key ) || empty( $this->cloudflare_email_address ) ){
+            return;
+        }
 
-		try{
+        $response = wp_remote_get( 'https://api.cloudflare.com/client/v4/zones', array(
+			'headers' => array(
+	        	'X-Auth-Key' 	=> $this->cloudflare_api_key,
+		        'X-Auth-Email'  => $this->cloudflare_email_address
+		    )
+		));
 
-			$res = $client->request('GET', 'https://api.cloudflare.com/client/v4/zones', [
-				'headers' => [
-		        	'X-Auth-Key' 	=> $this->cloudflare_api_key,
-			        'X-Auth-Email'  => $this->cloudflare_email_address
-			    ]
-			]);
-
-			echo $res->getStatusCode();
-			wp_die();
-
-		} catch ( Exception $e ) {
-
-			echo $e;
-			wp_die();
-		}
-
+        if( is_wp_error($response) ){
+            echo $response->get_error_message();
+        }
+        else if( wp_remote_retrieve_response_code($response) === 200 ){
+            echo 200;
+        }
+        else{
+            echo wp_remote_retrieve_response_code() . ': ' . wp_remote_retrieve_response_message();
+        }
+		wp_die();
 	}
 
 	/**
@@ -102,55 +105,58 @@ class WPCD_Cloudclient {
 	 */
 	public function wpcd_get_zones() {
 
-		$client = new GuzzleHttp\Client();
+        if( empty( $this->cloudflare_api_key ) || empty( $this->cloudflare_email_address ) ){
+            return;
+        }
 
-		try{
+    	$response = wp_remote_get( 'https://api.cloudflare.com/client/v4/zones', array(
+    		'headers' => array(
+    			'X-Auth-Key' 	=> $this->cloudflare_api_key,
+    			'X-Auth-Email'  => $this->cloudflare_email_address
+    		)
+    	));
+        if( is_wp_error( $response ) ){
+            return $response->get_error_message();
+        }
+		else if( json_decode( $response['body'] )->success === false ){
+			return json_decode( $response['body'] )->errors[0]->message;
 
-			$res = $client->request('GET', 'https://api.cloudflare.com/client/v4/zones', [
-				'headers' => [
-					'X-Auth-Key' 	=> $this->cloudflare_api_key,
-					'X-Auth-Email'  => $this->cloudflare_email_address
-				]
-			]);
-
-			// Zone data from cloudflare
-			$zoneJson = json_decode($res->getBody())->result;
-
-			// Array of zones to return
-			$zones = array();
-
-			foreach( $zoneJson as $zoneJ ){
-
-				$status = '';
-				switch( $zoneJ->status ){
-					case 'active':
-					case 'read-only':
-						$status = 'status-green';
-						break;
-
-					case 'pending':
-					case 'initializing':
-						$status = 'status-yellow';
-						break;
-
-					default:
-						$status = 'status-red';
-						break;
-				}
-
-				array_push( $zones, array(
-					'id' 		=> $zoneJ->id,
-					'name'		=> $zoneJ->name,
-					'status'	=> $status
-				));
-			}
-
-			return $zones;
-
-		} catch ( Exception $e ) {
-
-			return $e;
 		}
+        else{
+        	// Zone data from cloudflare
+        	$zoneJson = json_decode( $response['body'] )->result;
+
+        	// Array of zones to return
+        	$zones = array();
+
+        	foreach( $zoneJson as $zoneJ ){
+
+        		$status = '';
+        		switch( $zoneJ->status ){
+        			case 'active':
+        			case 'read-only':
+        				$status = 'status-green';
+        				break;
+
+        			case 'pending':
+        			case 'initializing':
+        				$status = 'status-yellow';
+        				break;
+
+        			default:
+        				$status = 'status-red';
+        				break;
+        		}
+
+        		array_push( $zones, array(
+        			'id' 		=> $zoneJ->id,
+        			'name'		=> $zoneJ->name,
+        			'status'	=> $status
+        		));
+        	}
+
+            return $zones;
+        }
 
 	}
 
@@ -160,23 +166,28 @@ class WPCD_Cloudclient {
 	 * @since  0.1.0
 	 * @param  $zoneId id of cloudflare zone
 	 * @param  $period period of time to retrieve data
-	 * @return $zones array of zones for current user ['x', 'Cached','Uncached']
+	 * @return $zones/WP_Error array of zones for current user ['x', 'Cached','Uncached']
 	 */
 	public function wpcd_get_requests( $zoneId, $period ) {
 
-		$client = new GuzzleHttp\Client();
+        if( empty( $this->cloudflare_api_key ) || empty( $this->cloudflare_email_address ) ){
+            return;
+        }
 
-		try{
-			$url = 'https://api.cloudflare.com/client/v4/zones/' . $zoneId . '/analytics/dashboard?since=-' . $period;
-			$res = $client->request('GET', $url, [
-				'headers' => [
-					'X-Auth-Key' 	=> $this->cloudflare_api_key,
-					'X-Auth-Email'  => $this->cloudflare_email_address
-				]
-			]);
+		$url = 'https://api.cloudflare.com/client/v4/zones/' . $zoneId . '/analytics/dashboard?since=-' . $period;
+		$response = wp_remote_get( $url, array(
+			'headers' => array(
+				'X-Auth-Key' 	=> $this->cloudflare_api_key,
+				'X-Auth-Email'  => $this->cloudflare_email_address
+			)
+		));
 
+        if( is_wp_error( $response ) ){
+            return $response->get_error_message();
+        }
+        else{
 			// Zone data from cloudflare
-			$timeJson = json_decode($res->getBody())->result->timeseries;
+			$timeJson = json_decode( $response['body'] )->result->timeseries;
 
 			// Array of cached requests
 			$crequests = array();
@@ -202,58 +213,8 @@ class WPCD_Cloudclient {
 				'ucrequests' => $ucrequests
 			);
 
-		} catch ( Exception $e ) {
-			return $e;
 		}
 
-	}
-
-	/**
-	 * Display Analytics for Requests
-	 *
-	 * @since  0.1.0
-	 * @param  $requests  an array of retrieved requests for a specific zone
-	 * @return void
-	 */
-	public static function display_requests( $requests ) {
-
-		?>
-			<div class="cmb2-analytics">
-				<div class="cmb2-analytics-data" id="wpcd-requests"></div>
-			</div>
-			<script type="text/javascript">
-				var chart = c3.generate({
-					bindto: '#wpcd-requests',
-					data: {
-						x: 'x',
-						xFormat: '%Y-%m-%dT%H:%M:%SZ',
-						columns: [
-							[<?php foreach( $requests['times'] as $time ): ?>
-								 '<?php echo $time ?>',
-							<?php endforeach; ?>],
-							[<?php foreach( $requests['crequests'] as $crequest ): ?>
-								 '<?php echo $crequest ?>',
-							<?php endforeach; ?>],
-							[<?php foreach( $requests['ucrequests'] as $ucrequest ): ?>
-								 '<?php echo $ucrequest ?>',
-							<?php endforeach; ?>]
-						],
-						types: {
-							'Uncached': 'area-spline',
-							'Cached': 'area-spline'
-						}
-					},
-					axis: {
-						x: {
-							type: 'timeseries',
-							tick: {
-								format: '%_m/%-e, %_I%p'
-							}
-						}
-					}
-				});
-			</script>
-		<?php
 	}
 
 	/**
@@ -262,23 +223,28 @@ class WPCD_Cloudclient {
 	 * @since  0.1.0
 	 * @param  $zoneId id of cloudflare zone
 	 * @param  $period    period of time to retrieve the data from
-	 * @return $zones array of zones for current user ['x', 'Cached','Uncached']
+	 * @return $zones/WP_Error array of zones for current user ['x', 'Cached','Uncached']
 	 */
 	public function wpcd_get_bandwidth( $zoneId, $period ) {
 
-		$client = new GuzzleHttp\Client();
+        if( empty( $this->cloudflare_api_key ) || empty( $this->cloudflare_email_address ) ){
+            return;
+        }
 
-		try{
-			$url = 'https://api.cloudflare.com/client/v4/zones/' . $zoneId . '/analytics/dashboard?since=-' . $period;
-			$res = $client->request('GET', $url, [
-				'headers' => [
-					'X-Auth-Key' 	=> $this->cloudflare_api_key,
-					'X-Auth-Email'  => $this->cloudflare_email_address
-				]
-			]);
+		$url = 'https://api.cloudflare.com/client/v4/zones/' . $zoneId . '/analytics/dashboard?since=-' . $period;
+		$response = wp_remote_get( $url, array(
+			'headers' => array(
+				'X-Auth-Key' 	=> $this->cloudflare_api_key,
+				'X-Auth-Email'  => $this->cloudflare_email_address
+			)
+		));
 
+        if( is_wp_error( $response ) ){
+            return $response->get_error_message();
+        }
+        else{
 			// Zone data from cloudflare
-			$timeJson = json_decode($res->getBody())->result->timeseries;
+			$timeJson = json_decode( $response['body'] )->result->timeseries;
 
 			// Array of cached requests
 			$crequests = array();
@@ -304,57 +270,8 @@ class WPCD_Cloudclient {
 				'ucrequests' => $ucrequests
 			);
 
-		} catch ( Exception $e ) {
-			return $e;
 		}
 
-	}
-
-	/**
-	 * Display Analytics for Bandwidth
-	 *
-	 * @since  0.1.0
-	 * @return void
-	 */
-	public static function display_bandwidth( $requests ) {
-
-		?>
-			<div class="cmb2-analytics">
-				<div class="cmb2-analytics-data" id="wpcd-bandwidth"></div>
-			</div>
-			<script type="text/javascript">
-				var chart = c3.generate({
-					bindto: '#wpcd-bandwidth',
-					data: {
-						x: 'x',
-						xFormat: '%Y-%m-%dT%H:%M:%SZ',
-						columns: [
-							[<?php foreach( $requests['times'] as $time ): ?>
-								 '<?php echo $time ?>',
-							<?php endforeach; ?>],
-							[<?php foreach( $requests['crequests'] as $crequest ): ?>
-								 '<?php echo $crequest ?>',
-							<?php endforeach; ?>],
-							[<?php foreach( $requests['ucrequests'] as $ucrequest ): ?>
-								 '<?php echo $ucrequest ?>',
-							<?php endforeach; ?>]
-						],
-						types: {
-							'Uncached': 'area-spline',
-							'Cached': 'area-spline'
-						}
-					},
-					axis: {
-						x: {
-							type: 'timeseries',
-							tick: {
-								format: '%_m/%-e, %_I%p'
-							}
-						}
-					}
-				});
-			</script>
-		<?php
 	}
 
 	/**
@@ -367,19 +284,24 @@ class WPCD_Cloudclient {
 	 */
 	public function wpcd_get_visitors( $zoneId, $period ) {
 
-		$client = new GuzzleHttp\Client();
+        if( empty( $this->cloudflare_api_key ) || empty( $this->cloudflare_email_address ) ){
+            return;
+        }
 
-		try{
-			$url = 'https://api.cloudflare.com/client/v4/zones/' . $zoneId . '/analytics/dashboard?since=-' . $period;
-			$res = $client->request('GET', $url, [
-				'headers' => [
-					'X-Auth-Key' 	=> $this->cloudflare_api_key,
-					'X-Auth-Email'  => $this->cloudflare_email_address
-				]
-			]);
+		$url = 'https://api.cloudflare.com/client/v4/zones/' . $zoneId . '/analytics/dashboard?since=-' . $period;
+		$response = wp_remote_get( $url, array(
+			'headers' => array(
+				'X-Auth-Key' 	=> $this->cloudflare_api_key,
+				'X-Auth-Email'  => $this->cloudflare_email_address
+			)
+		));
 
+		if( is_wp_error( $response ) ){
+            return $response->get_error_message();
+        }
+        else{
 			// Zone data from cloudflare
-			$timeJson = json_decode($res->getBody())->result->timeseries;
+			$timeJson = json_decode( $response['body'] )->result->timeseries;
 
 			// Array of cached requests
 			$uniques = array();
@@ -399,52 +321,7 @@ class WPCD_Cloudclient {
 				'uniques' => $uniques
 			);
 
-		} catch ( Exception $e ) {
-			return $e;
 		}
-
-	}
-
-	/**
-	 * Display Analytics for Unique Visitors
-	 *
-	 * @since  0.1.0
-	 * @return void
-	 */
-	public static function display_visitors( $visitors ) {
-		?>
-			<div class="cmb2-analytics">
-				<div class="cmb2-analytics-data" id="wpcd-visitors"></div>
-			</div>
-			<script type="text/javascript">
-				var chart = c3.generate({
-					bindto: '#wpcd-visitors',
-					data: {
-						x: 'x',
-						xFormat: '%Y-%m-%dT%H:%M:%SZ',
-						columns: [
-							[<?php foreach( $visitors['times'] as $time ): ?>
-								 '<?php echo $time ?>',
-							<?php endforeach; ?>],
-							[<?php foreach( $visitors['uniques'] as $unique ): ?>
-								 '<?php echo $unique ?>',
-							<?php endforeach; ?>]
-						],
-						types: {
-							'Unique Visitors': 'area-spline'
-						}
-					},
-					axis: {
-						x: {
-							type: 'timeseries',
-							tick: {
-								format: '%_m/%-e, %_I%p'
-							}
-						}
-					}
-				});
-			</script>
-		<?php
 	}
 
 	/**
@@ -457,19 +334,24 @@ class WPCD_Cloudclient {
 	 */
 	public function wpcd_get_threats( $zoneId, $period ) {
 
-		$client = new GuzzleHttp\Client();
+        if( empty( $this->cloudflare_api_key ) || empty( $this->cloudflare_email_address ) ){
+            return;
+        }
 
-		try{
-			$url = 'https://api.cloudflare.com/client/v4/zones/' . $zoneId . '/analytics/dashboard?since=-' . $period;
-			$res = $client->request('GET', $url, [
-				'headers' => [
-					'X-Auth-Key' 	=> $this->cloudflare_api_key,
-					'X-Auth-Email'  => $this->cloudflare_email_address
-				]
-			]);
+		$url = 'https://api.cloudflare.com/client/v4/zones/' . $zoneId . '/analytics/dashboard?since=-' . $period;
+		$response = wp_remote_get( $url, array(
+			'headers' => array(
+				'X-Auth-Key' 	=> $this->cloudflare_api_key,
+				'X-Auth-Email'  => $this->cloudflare_email_address
+			)
+		));
 
+		if( is_wp_error( $response ) ){
+            return $response->get_error_message();
+        }
+        else{
 			// Zone data from cloudflare
-			$timeJson = json_decode($res->getBody())->result->timeseries;
+			$timeJson = json_decode( $response['body'] )->result->timeseries;
 
 			// Array of cached requests
 			$threats = array();
@@ -489,52 +371,8 @@ class WPCD_Cloudclient {
 				'threats' => $threats
 			);
 
-		} catch ( Exception $e ) {
-			return $e;
 		}
 
-	}
-
-	/**
-	 * Display Analytics for Threats
-	 *
-	 * @since  0.1.0
-	 * @return void
-	 */
-	public static function display_threats( $threats ) {
-		?>
-			<div class="cmb2-analytics">
-				<div class="cmb2-analytics-data" id="wpcd-threats"></div>
-			</div>
-			<script type="text/javascript">
-				var chart = c3.generate({
-					bindto: '#wpcd-threats',
-					data: {
-						x: 'x',
-						xFormat: '%Y-%m-%dT%H:%M:%SZ',
-						columns: [
-							[<?php foreach( $threats['times'] as $time ): ?>
-								 '<?php echo $time ?>',
-							<?php endforeach; ?>],
-							[<?php foreach( $threats['threats'] as $threat ): ?>
-								 '<?php echo $threat ?>',
-							<?php endforeach; ?>]
-						],
-						types: {
-							'Threats': 'area-spline'
-						}
-					},
-					axis: {
-						x: {
-							type: 'timeseries',
-							tick: {
-								format: '%_m/%-e, %_I%p'
-							}
-						}
-					}
-				});
-			</script>
-		<?php
 	}
 
 	/**
@@ -547,19 +385,24 @@ class WPCD_Cloudclient {
 	 */
 	public function wpcd_get_ssl( $zoneId, $period ) {
 
-		$client = new GuzzleHttp\Client();
+        if( empty( $this->cloudflare_api_key ) || empty( $this->cloudflare_email_address ) ){
+            return;
+        }
 
-		try{
-			$url = 'https://api.cloudflare.com/client/v4/zones/' . $zoneId . '/analytics/dashboard?since=-' . $period;
-			$res = $client->request('GET', $url, [
-				'headers' => [
-					'X-Auth-Key' 	=> $this->cloudflare_api_key,
-					'X-Auth-Email'  => $this->cloudflare_email_address
-				]
-			]);
+		$url = 'https://api.cloudflare.com/client/v4/zones/' . $zoneId . '/analytics/dashboard?since=-' . $period;
+		$response = wp_remote_get( $url, array(
+			'headers' => array(
+				'X-Auth-Key' 	=> $this->cloudflare_api_key,
+				'X-Auth-Email'  => $this->cloudflare_email_address
+			)
+		));
 
+		if( is_wp_error( $response ) ){
+			return $response->get_error_message();
+		}
+		else{
 			// Zone data from cloudflare
-			$timeJson = json_decode($res->getBody())->result->timeseries;
+			$timeJson = json_decode( $response['body'] )->result->timeseries;
 
 			// Array of encrypted requests
 			$encrypted = array();
@@ -585,55 +428,7 @@ class WPCD_Cloudclient {
 				'unencrypted' => $unencrypted
 			);
 
-		} catch ( Exception $e ) {
-			return $e;
 		}
-
 	}
 
-	/**
-	 * Display Analytics for SSL
-	 *
-	 * @since  0.1.0
-	 * @return void
-	 */
-	public static function display_ssl( $requests ) {
-		?>
-			<div class="cmb2-analytics">
-				<div class="cmb2-analytics-data" id="wpcd-ssl"></div>
-			</div>
-			<script type="text/javascript">
-				var chart = c3.generate({
-					bindto: '#wpcd-ssl',
-					data: {
-						x: 'x',
-						xFormat: '%Y-%m-%dT%H:%M:%SZ',
-						columns: [
-							[<?php foreach( $requests['times'] as $time ): ?>
-								 '<?php echo $time ?>',
-							<?php endforeach; ?>],
-							[<?php foreach( $requests['encrypted'] as $request ): ?>
-								 '<?php echo $request ?>',
-							<?php endforeach; ?>],
-							[<?php foreach( $requests['unencrypted'] as $request ): ?>
-								 '<?php echo $request ?>',
-							<?php endforeach; ?>]
-						],
-						types: {
-							'Encrypted': 'area-spline',
-							'Unencrypted': 'area-spline'
-						}
-					},
-					axis: {
-						x: {
-							type: 'timeseries',
-							tick: {
-								format: '%_m/%-e, %_I%p'
-							}
-						}
-					}
-				});
-			</script>
-		<?php
-	}
 }

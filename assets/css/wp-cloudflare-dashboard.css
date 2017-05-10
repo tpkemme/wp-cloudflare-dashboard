@@ -6,6 +6,33 @@
  * Licensed under the GPLv2+ license.
  */
 /**
+ * WP Cloudflare Dashboard Analytics Styles
+ *
+ * Styles for the analytics page
+ *
+ * https://tylerkemme.com
+ *
+ * Copyright (c) 2017 Tyler Kemme
+ * Licensed under the GPLv2+ license.
+*/
+.wpcd-analytics {
+  background: #fff;
+  padding: 20px 15px;
+  border: none;
+  margin: 10px -4px; }
+  .wpcd-analytics .wpcd-analytics-data {
+    max-width: 97.5%;
+    padding: 20px 0; }
+    .wpcd-analytics .wpcd-analytics-data svg {
+      overflow: visible !important; }
+
+#analytics-tabs {
+  background: #fff;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+  padding: 15px 15px 0;
+  border: 1px solid #e5e5e5; }
+
+/**
  * WP Cloudflare Dashboard CMB2 Styles
  *
  * Styles for the metabox/custom fields library CMB2
@@ -15,17 +42,6 @@
  * Copyright (c) 2017 Tyler Kemme
  * Licensed under the GPLv2+ license.
 */
-.cmb2-analytics {
-  background: #fff;
-  padding: 20px 15px;
-  border: none;
-  margin: 10px -4px; }
-  .cmb2-analytics .cmb2-analytics-data {
-    max-width: 97.5%;
-    padding: 20px 0; }
-    .cmb2-analytics .cmb2-analytics-data svg {
-      overflow: visible !important; }
-
 .cmb2-options-page .cmb-form .cmb-row {
   padding: 7px 25px !important;
   margin-bottom: 10px;
@@ -53,100 +69,6 @@
   padding: 10px 0px !important; }
 
 /**
- * WP Cloudflare Dashboard tabs
- *
- * Styles for Jquery UI tabs
- *
- * https://tylerkemme.com
- *
- * Copyright (c) 2017 Tyler Kemme
- * Licensed under the GPLv2+ license.
-*/
-.ui-tabs .ui-tabs-nav {
-  overflow: visible;
-  padding: 0 0 0 !important;
-  margin: -15px -29px 0 -15px !important;
-  border-radius: 0;
-  border: none;
-  background: #f1f1f1;
-  outline: none;
-  box-shadow: none; }
-  .ui-tabs .ui-tabs-nav li.ui-state-active {
-    margin-bottom: 0;
-    position: relative;
-    z-index: 3;
-    top: 1px;
-    box-shadow: none !important;
-    outline: none !important;
-    border: 1px solid #aaa;
-    border-bottom-color: white; }
-  .ui-tabs .ui-tabs-nav li {
-    display: inline-block;
-    padding: 8px 0 !important;
-    width: calc( 20% - 5px);
-    text-align: center;
-    border: 1px solid #d5d5d5;
-    margin: 0; }
-    .ui-tabs .ui-tabs-nav li:active, .ui-tabs .ui-tabs-nav li .ui-state-active {
-      margin-bottom: 0;
-      position: relative;
-      z-index: 3;
-      top: 1px;
-      box-shadow: none !important;
-      outline: none !important;
-      border: 1px solid #aaa;
-      border-bottom-color: white; }
-    .ui-tabs .ui-tabs-nav li:focus {
-      outline-style: none; }
-    .ui-tabs .ui-tabs-nav li a.ui-tabs-anchor {
-      font-size: 22px;
-      font-weight: 300;
-      text-decoration: none;
-      font-family: 'Helvetica Neue';
-      width: 81.5%; }
-      .ui-tabs .ui-tabs-nav li a.ui-tabs-anchor:focus {
-        outline: none;
-        box-shadow: none; }
-      .ui-tabs .ui-tabs-nav li a.ui-tabs-anchor span:focus {
-        outline: none; }
-
-.ui-tabs-panel {
-  z-index: 0;
-  display: block;
-  padding: 1em 1.4em !important;
-  background: white;
-  margin: 0px -15px;
-  position: relative;
-  border: 1px solid #aaa !important; }
-
-/**
- * WP Cloudflare Dashboard
- * https://tylerkemme.com
- *
- * Copyright (c) 2017 Tyler Kemme
- * Licensed under the GPLv2+ license.
-*/
-.ui-selectmenu-menu .ui-menu.customicons .ui-menu-item-wrapper {
-  padding: 0.5em 0 0.5em 3em; }
-
-.ui-selectmenu-menu .ui-menu.customicons .ui-menu-item .ui-icon {
-  height: 24px;
-  width: 24px;
-  top: 0.1em; }
-
-.ui-selectmenu-menu .ui-menu.customicons .ui-menu-item .ui-icon.status-green {
-  background-image: url("../images/status-green.png") !important;
-  background-size: contain; }
-
-.ui-selectmenu-menu .ui-menu.customicons .ui-menu-item .ui-icon.status-yellow {
-  background-image: url("../images/status-yellow.png") !important;
-  background-size: contain; }
-
-.ui-selectmenu-menu .ui-menu.customicons .ui-menu-item .ui-icon.status-red {
-  background-image: url("../images/status-red.png") !important;
-  background-size: contain; }
-
-/**
  * WP Cloudflare Dashboard Styles
  *
  * Styles specifically for this plugin and its parts
@@ -156,12 +78,6 @@
  * Copyright (c) 2017 Tyler Kemme
  * Licensed under the GPLv2+ license.
 */
-#analytics-tabs {
-  background: #fff;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
-  padding: 15px 15px 0;
-  border: 1px solid #e5e5e5; }
-
 fieldset {
   border: 0; }
 
@@ -208,12 +124,10 @@ label {
   #timeSelect-menu li .ui-icon {
     display: none; }
 
-#timeSelect-button,
-#zoneSelect-button {
+#filter-button {
   min-width: 250px;
   margin: 10px 0px; }
-  #timeSelect-button:focus,
-  #zoneSelect-button:focus {
+  #filter-button:focus {
     outline: none; }
 
 /*# sourceMappingURL=wp-cloudflare-dashboard.css.map */

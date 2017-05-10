@@ -3,7 +3,7 @@
  * Plugin Name: WP Cloudflare Dashboard
  * Plugin URI:  https://tylerkemme.com
  * Description: A Cloudflare Analytics Dashboard for Wordpress.
- * Version:     0.3.3
+ * WPCD_VERSION:     0.3.3
  * Author:      Tyler Kemme
  * Author URI:  https://tylerkemme.com
  * Donate link: https://tylerkemme.com
@@ -14,15 +14,15 @@
  * @link https://tylerkemme.com
  *
  * @package WP Cloudflare Dashboard
- * @version 0.3.3
+ * @WPCD_VERSION 0.3.3
  */
 
 /**
  * Copyright (c) 2017 Tyler Kemme (email : tylerkemme@gmail.com)
  *
  * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License, version 2 or, at
- * your discretion, any later version, as published by the Free
+ * it under the terms of the GNU General Public License, WPCD_VERSION 2 or, at
+ * your discretion, any later WPCD_VERSION, as published by the Free
  * Software Foundation.
  *
  * This program is distributed in the hope that it will be useful,
@@ -45,23 +45,23 @@ require 'vendor/autoload.php';
 /**
  * Main initiation class
  *
- * @since  0.0.0
+ * @since 0.3.3
  */
 final class WP_Cloudflare_Dashboard {
 
 	/**
-	 * Current version
+	 * Current WPCD_VERSION
 	 *
 	 * @var  string
-	 * @since  0.0.0
+	 * @since 0.3.3
 	 */
-	const VERSION = '0.3.3';
+	const WPCD_VERSION = '0.3.4';
 
 	/**
 	 * URL of plugin directory
 	 *
 	 * @var string
-	 * @since  0.0.0
+	 * @since 0.3.3
 	 */
 	protected $url = '';
 
@@ -69,7 +69,7 @@ final class WP_Cloudflare_Dashboard {
 	 * Path of plugin directory
 	 *
 	 * @var string
-	 * @since  0.0.0
+	 * @since 0.3.3
 	 */
 	protected $path = '';
 
@@ -77,7 +77,7 @@ final class WP_Cloudflare_Dashboard {
 	 * Plugin basename
 	 *
 	 * @var string
-	 * @since  0.0.0
+	 * @since 0.3.3
 	 */
 	protected $basename = '';
 
@@ -85,7 +85,7 @@ final class WP_Cloudflare_Dashboard {
 	 * Detailed activation error messages
 	 *
 	 * @var array
-	 * @since  0.0.0
+	 * @since 0.3.3
 	 */
 	protected $activation_errors = array();
 
@@ -93,14 +93,14 @@ final class WP_Cloudflare_Dashboard {
 	 * Singleton instance of plugin
 	 *
 	 * @var WP_Cloudflare_Dashboard
-	 * @since  0.0.0
+	 * @since 0.3.3
 	 */
 	protected static $single_instance = null;
 
 	/**
 	 * Instance of WPCD_Options
 	 *
-	 * @since0.0.0
+	 * @since 0.0.0
 	 * @var WPCD_Options
 	 */
 	protected $options;
@@ -108,7 +108,7 @@ final class WP_Cloudflare_Dashboard {
 	/**
 	 * Instance of WPCD_Cloudclient
 	 *
-	 * @since0.1.0
+	 * @since 0.1.0
 	 * @var WPCD_Cloudclient
 	 */
 	protected $cloudclient;
@@ -116,7 +116,7 @@ final class WP_Cloudflare_Dashboard {
 	/**
 	 * Instance of WPCD_Assets
 	 *
-	 * @since0.1.0
+	 * @since 0.1.0
 	 * @var WPCD_Assets
 	 */
 	protected $assets;
@@ -124,15 +124,23 @@ final class WP_Cloudflare_Dashboard {
 	/**
 	 * Instance of WPCD_Analytics
 	 *
-	 * @since0.2.0
+	 * @since 0.3.3
 	 * @var WPCD_Analytics
 	 */
 	protected $analytics;
 
 	/**
+	 * Instance of WPCD_Charts
+	 *
+	 * @since 0.3.3
+	 * @var WPCD_Charts
+	 */
+	protected $charts;
+
+	/**
 	 * Creates or returns an instance of this class.
 	 *
-	 * @since  0.0.0
+	 * @since 0.3.3
 	 * @return WP_Cloudflare_Dashboard A single instance of this class.
 	 */
 	public static function get_instance() {
@@ -146,7 +154,7 @@ final class WP_Cloudflare_Dashboard {
 	/**
 	 * Sets up our plugin
 	 *
-	 * @since  0.0.0
+	 * @since 0.3.3
 	 */
 	protected function __construct() {
 		$this->basename = plugin_basename( __FILE__ );
@@ -157,20 +165,22 @@ final class WP_Cloudflare_Dashboard {
 	/**
 	 * Attach other plugin classes to the base plugin class.
 	 *
-	 * @since  0.0.0
+	 * @since 0.3.3
 	 * @return void
 	 */
 	public function plugin_classes() {
 		// Attach other plugin classes to the base plugin class.
 		$this->options = new WPCD_Options( $this );
+		$this->analytics = new WPCD_Analytics( $this );
 		$this->cloudclient = new WPCD_Cloudclient( $this );
+		$this->charts = new WPCD_Charts( $this );
 		$this->assets = new WPCD_Assets( $this );
 	} // END OF PLUGIN CLASSES FUNCTION
 
 	/**
 	 * Add hooks and filters
 	 *
-	 * @since  0.0.0
+	 * @since 0.3.3
 	 * @return void
 	 */
 	public function hooks() {
@@ -184,7 +194,7 @@ final class WP_Cloudflare_Dashboard {
 	/**
 	 * Activate the plugin
 	 *
-	 * @since  0.0.0
+	 * @since 0.3.3
 	 * @return void
 	 */
 	public function _activate() {
@@ -196,7 +206,7 @@ final class WP_Cloudflare_Dashboard {
 	 * Deactivate the plugin
 	 * Uninstall routines should be in uninstall.php
 	 *
-	 * @since  0.0.0
+	 * @since 0.3.3
 	 * @return void
 	 */
 	public function _deactivate() {}
@@ -204,7 +214,7 @@ final class WP_Cloudflare_Dashboard {
 	/**
 	 * Init hooks
 	 *
-	 * @since  0.0.0
+	 * @since 0.3.3
 	 * @return void
 	 */
 	public function init() {
@@ -224,7 +234,7 @@ final class WP_Cloudflare_Dashboard {
 	 * Check if the plugin meets requirements and
 	 * disable it if they are not present.
 	 *
-	 * @since  0.0.0
+	 * @since 0.3.3
 	 * @return boolean result of meets_requirements
 	 */
 	public function check_requirements() {
@@ -245,7 +255,7 @@ final class WP_Cloudflare_Dashboard {
 	/**
 	 * Deactivates this plugin, hook this function on admin_init.
 	 *
-	 * @since  0.0.0
+	 * @since 0.3.3
 	 * @return void
 	 */
 	public function deactivate_me() {
@@ -259,7 +269,7 @@ final class WP_Cloudflare_Dashboard {
 	/**
 	 * Check that all plugin requirements are met
 	 *
-	 * @since  0.0.0
+	 * @since 0.3.3
 	 * @return boolean True if requirements are met.
 	 */
 	public function meets_requirements() {
@@ -273,7 +283,7 @@ final class WP_Cloudflare_Dashboard {
 	/**
 	 * Adds a notice to the dashboard if the plugin requirements are not met
 	 *
-	 * @since  0.0.0
+	 * @since 0.3.3
 	 * @return void
 	 */
 	public function requirements_not_met_notice() {
@@ -303,7 +313,7 @@ final class WP_Cloudflare_Dashboard {
 	/**
 	 * Magic getter for our object.
 	 *
-	 * @since  0.0.0
+	 * @since 0.3.3
 	 * @param string $field Field to get.
 	 * @throws Exception Throws an exception if the field is invalid.
 	 * @return mixed
@@ -311,12 +321,14 @@ final class WP_Cloudflare_Dashboard {
 	public function __get( $field ) {
 		switch ( $field ) {
 			case 'version':
-				return self::VERSION;
+				return self::WPCD_VERSION;
 			case 'basename':
 			case 'url':
 			case 'path':
 			case 'options':
+			case 'analytics':
 			case 'cloudclient':
+			case 'charts':
 			case 'assets':
 				return $this->$field;
 			default:
@@ -329,7 +341,7 @@ final class WP_Cloudflare_Dashboard {
  * Grab the WP_Cloudflare_Dashboard object and return it.
  * Wrapper for WP_Cloudflare_Dashboard::get_instance()
  *
- * @since  0.0.0
+ * @since 0.3.3
  * @return WP_Cloudflare_Dashboard  Singleton instance of plugin class.
  */
 function wpcd() {

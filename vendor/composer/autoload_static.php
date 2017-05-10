@@ -6,44 +6,6 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit00ab720335e10d22966530f1721378ee
 {
-    public static $files = array (
-        'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
-        'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
-        '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
-    );
-
-    public static $prefixLengthsPsr4 = array (
-        'P' => 
-        array (
-            'Psr\\Http\\Message\\' => 17,
-        ),
-        'G' => 
-        array (
-            'GuzzleHttp\\Psr7\\' => 16,
-            'GuzzleHttp\\Promise\\' => 19,
-            'GuzzleHttp\\' => 11,
-        ),
-    );
-
-    public static $prefixDirsPsr4 = array (
-        'Psr\\Http\\Message\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-        ),
-        'GuzzleHttp\\Psr7\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
-        ),
-        'GuzzleHttp\\Promise\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/guzzlehttp/promises/src',
-        ),
-        'GuzzleHttp\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
-        ),
-    );
-
     public static $prefixesPsr0 = array (
         'C' => 
         array (
@@ -55,7 +17,9 @@ class ComposerStaticInit00ab720335e10d22966530f1721378ee
     );
 
     public static $classMap = array (
+        'WPCD_Analytics' => __DIR__ . '/../..' . '/includes/class-analytics.php',
         'WPCD_Assets' => __DIR__ . '/../..' . '/includes/class-assets.php',
+        'WPCD_Charts' => __DIR__ . '/../..' . '/includes/class-charts.php',
         'WPCD_Cloudclient' => __DIR__ . '/../..' . '/includes/class-cloudclient.php',
         'WPCD_Options' => __DIR__ . '/../..' . '/includes/class-options.php',
         'WP_Cloudflare_Dashboard' => __DIR__ . '/../..' . '/wp-cloudflare-dashboard.php',
@@ -64,8 +28,6 @@ class ComposerStaticInit00ab720335e10d22966530f1721378ee
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit00ab720335e10d22966530f1721378ee::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit00ab720335e10d22966530f1721378ee::$prefixDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInit00ab720335e10d22966530f1721378ee::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit00ab720335e10d22966530f1721378ee::$classMap;
 

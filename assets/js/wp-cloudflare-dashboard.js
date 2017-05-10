@@ -24,7 +24,6 @@ window.WPCloudflareDashboard = window.WPCloudflareDashboard || {};
 
 		// Test Cloudflare Credentials
 		$( 'input[name="test-cloudflare-creds"]' ).bind( 'click', function( event ) {
-
 			var data = {
 				'action': 'test_cloudflare_creds'
 			};
@@ -40,6 +39,7 @@ window.WPCloudflareDashboard = window.WPCloudflareDashboard || {};
 			}
 
 			jQuery.post( '/wp-admin/admin-ajax.php', data, function( response ) {
+
 				if ( '200' === response ) {
 					$( '<span id="green-success-connection"><span style="font-size: 20px;">✓</span> Connection successful</span>' ).insertAfter( $( 'input[name="test-cloudflare-creds"]' ) );
 				} else {
@@ -49,34 +49,12 @@ window.WPCloudflareDashboard = window.WPCloudflareDashboard || {};
 
 		});
 
-		// Initiate jquery tabs on analytics page
-		$( '#analytics-tabs' ).tabs();
+		if ( 0 < $( '.wpcd-analytics-page' ).length ) {
 
-		// Initiate selectmenu on analytics page
-		$( function() {
-			$.widget( 'custom.iconselectmenu', $.ui.selectmenu, {
-				_renderItem: function( ul, item ) {
-					var li = $( '<li>' ),
-						wrapper = $( '<div>', { text: item.label });
+			// Initiate jquery tabs on analytics page
+			$( '#analytics-tabs' ).tabs();
 
-					if ( item.disabled ) {
-						li.addClass( 'ui-state-disabled' );
-					}
-
-					$( '<span>', {
-						style: item.element.attr( 'data-style' ),
-						'class': 'ui-icon ' + item.element.attr( 'data-class' )
-					})
-					.appendTo( wrapper );
-
-					return li.append( wrapper ).appendTo( ul );
-				}
-			});
-
-			$( '#zoneSelect' ).iconselectmenu().iconselectmenu( 'menuWidget' );
-			$( '#timeSelect' ).iconselectmenu().iconselectmenu( 'menuWidget' );
-		});
-
+		}
 	};
 
 	$( plugin.init );
