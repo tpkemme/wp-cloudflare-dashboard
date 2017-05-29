@@ -55,7 +55,7 @@ final class WP_Cloudflare_Dashboard {
 	 * @var  string
 	 * @since 0.3.3
 	 */
-	const WPCD_VERSION = '0.3.5';
+	const WPCD_VERSION = '0.3.6';
 
 	/**
 	 * URL of plugin directory
