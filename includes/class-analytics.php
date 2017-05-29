@@ -83,8 +83,9 @@ class WPCD_Analytics {
 		$cloudclient = $this->plugin->cloudclient;
 		$charts = $this->plugin->charts;
 		$zones = $cloudclient->wpcd_get_zones();
-
-		if( empty( wpcd_get_option( 'cloudflare_email_address' ) ) || empty( wpcd_get_option( 'cloudflare_api_key' ) ) ): ?>
+		$ccemail = wpcd_get_option( 'cloudflare_email_address' );
+		$ccapi = wpcd_get_option( 'cloudflare_api_key' );
+		if( empty( $ccemail ) || empty( $ccapi ) ): ?>
 			<div class="wrap wpcd-analytics-page <?php echo esc_attr( $this->key ); ?>">
 				<h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
 				<br/>
