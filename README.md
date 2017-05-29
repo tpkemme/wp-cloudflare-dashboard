@@ -1,4 +1,6 @@
 # WP Cloudflare Dashboard #
+[![Build Status](https://travis-ci.org/tpkemme/wp-cloudflare-dashboard.svg?branch=master)](https://travis-ci.org/tpkemme/wp-cloudflare-dashboard)
+
 **Contributors:**      Tyler Kemme  
 **Requires at least:** 4.4  
 **Tested up to:**      4.7.2
