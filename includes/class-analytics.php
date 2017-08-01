@@ -89,13 +89,13 @@ class WPCD_Analytics {
 			<div class="wrap wpcd-analytics-page <?php echo esc_attr( $this->key ); ?>">
 				<h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
 				<br/>
-				<div class="notice notice-error"><p>Please set your Cloudflare API Key and Email Address <a href="/wp-admin/admin.php?page=wp_cloudflare_dashboard_options">here</a>.</p></div>
+				<div class="notice notice-error"><p>Please set your Cloudflare API Key and Email Address <a href="<?php echo get_site_url() . '/wp-admin/admin.php?page=wp_cloudflare_dashboard_options'; ?>">here</a>.</p></div>
 			</div>
 		<?php elseif( $zones === 'Invalid request headers'): ?>
 			<div class="wrap wpcd-analytics-page <?php echo esc_attr( $this->key ); ?>">
 				<h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
 				<br/>
-				<div class="notice notice-error"><p>There was a problem with your Cloudflare credentials.  Please verify them <a href="/wp-admin/admin.php?page=wp_cloudflare_dashboard_options">here</a>.</p></div>
+				<div class="notice notice-error"><p>There was a problem with your Cloudflare credentials.  Please verify them <a href="<?php echo get_site_url() . '/wp-admin/admin.php?page=wp_cloudflare_dashboard_options'; ?>">here</a>.</p></div>
 			</div>
 		<?php else: ?>
 			<div class="wrap wpcd-analytics-page <?php echo esc_attr( $this->key ); ?>">

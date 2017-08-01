@@ -92,21 +92,21 @@ class WPCD_Assets {
 		// Only load on cloudflare dashboard page
 		if( $hook === 'cloudflare-dashboard_page_wp_cloudflare_dashboard_options' ){
 			wp_enqueue_script( 'wpcd_admin_js', plugins_url( 'assets/scripts/wp-cloudflare-dashboard.min.js', dirname(__FILE__) ) );
-        }
-        if( $hook === 'toplevel_page_wp_cloudflare_dashboard_analytics' ) {
+    }
+    if( $hook === 'toplevel_page_wp_cloudflare_dashboard_analytics' ) {
 
 			wp_enqueue_script( 'jquery-ui-core' );			// enqueue jQuery UI Core
-		    wp_enqueue_script( 'jquery-ui-tabs' );			// enqueue jQuery UI Tabs
+      wp_enqueue_script( 'jquery-ui-tabs' );			// enqueue jQuery UI Tabs
 
-			wp_enqueue_script( 'google_charts_js',  'https://www.gstatic.com/charts/loader.js' );
+	    wp_enqueue_script( 'charts_js',  plugins_url('assets/bower/chart.js/dist/Chart.js', dirname(__FILE__) ) );
 
-			wp_enqueue_script(
+	    wp_enqueue_script(
 				'wpcd_admin_js',
 				plugins_url( 'assets/scripts/wp-cloudflare-dashboard.min.js', dirname(__FILE__) ),
-				array( 'google_charts_js'),
+				array( 'charts_js'),
 			   	false,
 				true
 			);
-		}
+    }
 	}
 }

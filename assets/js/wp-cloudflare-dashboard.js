@@ -20,6 +20,12 @@ window.WPCloudflareDashboard = window.WPCloudflareDashboard || {};
 		$c.body = $( document.body );
 	};
 
+	plugin.homeUrl = function() {
+		var href = window.location.href;
+		var index = href.indexOf('/wp-admin');
+		return href.substring(0, index);
+	};
+
 	plugin.bindEvents = function() {
 
 		// Test Cloudflare Credentials
@@ -38,7 +44,7 @@ window.WPCloudflareDashboard = window.WPCloudflareDashboard || {};
 				$( '#red-error-connection' ).remove();
 			}
 
-			jQuery.post( '/wp-admin/admin-ajax.php', data, function( response ) {
+			jQuery.post( plugin.homeUrl() + '/wp-admin/admin-ajax.php', data, function( response ) {
 
 				if ( '200' === response ) {
 					$( '<span id="green-success-connection"><span style="font-size: 20px;">✓</span> Connection successful</span>' ).insertAfter( $( 'input[name="test-cloudflare-creds"]' ) );
@@ -61,6 +67,3 @@ window.WPCloudflareDashboard = window.WPCloudflareDashboard || {};
 
 
 }( window, document, jQuery, window.WPCloudflareDashboard ) );
-
-/* global google */
-google.charts.load( 'current', { 'packages': [ 'corechart' ] });

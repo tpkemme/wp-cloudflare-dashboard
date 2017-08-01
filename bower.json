@@ -14,6 +14,6 @@
     "tests"
   ],
   "dependencies": {
-    "c3": "^0.4.11"
+    "chart.js": "^2.6.0"
   }
 }

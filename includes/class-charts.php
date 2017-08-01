@@ -43,29 +43,33 @@ class WPCD_Charts {
 	 * @return void
 	 */
 	public static function display_requests( $requests ) {
-		?>
+		var_dump( $requests );
+	    ?>
 		<div id = "requests">
 			<div class="cmb2-analytics">
-				<div class="cmb2-analytics-data" id="wpcd-requests"></div>
-			</div>
-			<script type="text/javascript">
-				google.charts.setOnLoadCallback( drawRequestsChart );
-
-				function drawRequestsChart() {
-					var data = google.visualization.arrayToDataTable( <?php echo json_encode( $requests ); ?> ),
-					options = {
-						title: 'Requests',
-						hAxis: {title: 'x',  titleTextStyle: {color: '#333'}},
-						vAxis: {minValue: 0},
-						width: 600,
-						height: 400
-					},
-					chart = new google.visualization.AreaChart( document.getElementById( 'wpcd-requests' ) );
-
-					chart.draw( data, options );
-
-				}
-			</script>
+				<canvas class="cmb2-analytics-data" id="wpcd-requests"></canvas>
+            </div>
+            <script>
+                var ctx = document.getElementById("wpcd-requests");
+                var chart = new Chart(ctx, {
+	                type: 'line',
+                    data: [<?php foreach( $requests as $time ): ?>
+	                    '<?php echo $time[0] ?>',
+	                    <?php endforeach; ?>],
+	                options: {
+		                scales: {
+			                xAxes: [{
+				                type: 'time',
+				                time: {
+					                displayFormats: {
+						                quarter: 'MMM YYYY'
+					                }
+				                }
+			                }]
+		                }
+	                }
+                });
+            </script>
 		</div>
 		<?php
 	}
@@ -82,22 +86,7 @@ class WPCD_Charts {
 			<div class="cmb2-analytics">
 				<div class="cmb2-analytics-data" id="wpcd-bandwidth"></div>
 			</div>
-			<!-- <script type="text/javascript">
-			function drawChart() {
-				var data = google.visualization.arrayToDataTable( <?php echo json_encode( $requests ); ?> ),
-				options = {
-					title: 'Requests',
-					hAxis: {title: 'x',  titleTextStyle: {color: '#333'}},
-					vAxis: {minValue: 0},
-					'width':600,
-					'height':400
-				},
-				chart = new google.visualization.AreaChart( document.getElementById( 'wpcd-bandwidth' ) );
 
-				chart.draw( data, options );
-
-			}
-			</script> -->
 		</div>
 		<?php
 	}
